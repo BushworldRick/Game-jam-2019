@@ -6,6 +6,9 @@ win_height = 600
 pygame.init()
 win = pygame.display.set_mode((win_width, win_height))
 
+TheEnd_dict = {"0": "t", "1": "h", "2": "e", "3": "e", "4": "n", "5": "d"}
+#TheEnd_dict = dict(l1 = "t", l2 = "h", l3 = "e", l4 = "e", l5 = "n", l6 = "d")
+
 # Player Sprite
 SHIP = pygame.image.load("Sprites/spritesheetSpaceship.png")
 img_w = SHIP.get_width()
