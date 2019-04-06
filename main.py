@@ -1,6 +1,7 @@
 from map import *
 from boss import *
 from terminal import *
+import random
 
 # Pygame startup
 clock = pygame.time.Clock()
@@ -76,7 +77,16 @@ while not done:
     for star in stars:
         x = star[0]
         y = star[1]
-        pygame.draw.circle(win, (220, 220, 220), (int(x), int(y)), star[2])
+        rgb = random.randint(100, 255)
+        pygame.draw.circle(win, (rgb, rgb, rgb), (int(x), int(y)), star[2])
+
+    pcent = my_map.Player.health / my_map.Player.max_health
+    color = my_map.hp_bar.get_at((int((my_map.hp_bar.get_width() - 1) * pcent), 0))
+    width = 150 * pcent
+    outer_width = 153
+    pygame.draw.rect(win, (255, 255, 255), (618, 18, outer_width, 15), 2)
+    pygame.draw.rect(win, color, (620, 20, width, 12))
+
     if add_phase:
         my_map.draw(win)
     elif boss_phase:
