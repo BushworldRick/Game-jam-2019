@@ -29,8 +29,8 @@ class Map:
                     self.mPreset_enemies.append(Enemy(spwn_x, -50, str(letter)))
                     del TheEnd_dict[key]
                     num -= 1
-            else:
-                self.mPreset_enemies.append(Enemy(spwn_x, -50))
+                else:
+                    self.mPreset_enemies.append(Enemy(spwn_x, -50))
         print(num, "num before while loop")
         while num > 0:
             spwn_x = randint(0, win_width)
@@ -76,13 +76,13 @@ class Map:
                 if e.mPos[1] > 810:
                     self.mEnemies.remove(e)
 
-        for bullet in self.Player.bullet_list:
-            b_x = bullet.pos[0]
-            b_y = bullet.pos[1]
-            for enemy in self.mEnemies:
-                if enemy.pars_y <= 8:
-                    self.mEnemies.remove(enemy)
-                    break
+        for enemy in self.mEnemies:
+            if enemy.pars_y <= 8:
+                self.mEnemies.remove(enemy)
+                break
+            for bullet in self.Player.bullet_list:
+                b_x = bullet.pos[0]
+                b_y = bullet.pos[1]
                 e_x = enemy.mPos[0]
                 e_y = enemy.mPos[1]
                 a = e_x - b_x
