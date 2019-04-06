@@ -45,16 +45,12 @@ while not done:
         add_phase = list2[1]
         if not add_phase:
             my_map.reset()
-            boss_phase = True
-            add_phase = False
     elif boss_phase:
         list = boss.input(evt, keys)
         boss_phase = list[0]
         add_phase = list[1]
         if not boss_phase:
             boss.reset()
-            boss_phase = False
-            add_phase = True
 
     if evt.type == pygame.QUIT:
         done = True
