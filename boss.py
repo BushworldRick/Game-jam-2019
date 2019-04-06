@@ -17,6 +17,7 @@ class Boss:
         self.mBoss_phase = True
         self.mAdd_phase = False
         self.mBullet_cooldown = 1
+        self.enemy_box = (self.position[0] - (self.mBoss_w / 2), self.position[1] - (self.mBoss_h / 2), self.mBoss_w, self.mBoss_h)
 
         # text box / timer stuff
         self.print1 = False
@@ -113,3 +114,5 @@ class Boss:
             win.blit(self.text_box,(self.position[0],self.position[1] + 250))
             self.text_box.fill((255,255,255))
             self.text_box.blit(self.font.render(self.print2_text, True, (0,0,0)),(15,15))
+
+        pygame.draw.ellipse(win, (255, 255, 255), (self.position[0] - (self.mBoss_w / 2), self.position[1] - (self.mBoss_h / 2), self.mBoss_w, self.mBoss_h), 2)

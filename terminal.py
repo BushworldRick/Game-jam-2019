@@ -23,6 +23,9 @@ class Terminal:
                 self.x = 0
                 self.term_string = "Code: "
                 self.not_available = False
+                if self.term_string == "theend":
+                    code = True
+                    return code
 
     def input(self, evt, keys):
         if evt.type == pygame.KEYDOWN:
