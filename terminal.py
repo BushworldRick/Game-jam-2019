@@ -30,6 +30,7 @@ class Terminal:
         for s in self.solutions:
             if s == self.locked_input:
                 self.code_good = True
+                self.term_string = "Code: Accepted"
                 #print(self.code_good)
         return self.code_good
 
@@ -52,4 +53,7 @@ class Terminal:
 
     def draw(self, win):
         win.blit(self.image, (0, 0, win_width, win_height))
-        win.blit(self.font.render(self.term_string, True, (255, 255, 255)), (245, 170))
+        win.blit(self.font.render(self.term_string, True, (255, 255, 255)), (220, 170))
+        win.blit(self.font.render("Tab to Exit Terminal", True, (255, 255, 255)), (220, 252))
+        win.blit(self.font.render("Enter to Test Code", True, (255, 255, 255)), (220, 300))
+        win.blit(self.font.render("Backspace to Clear Code", True, (255, 255, 255)), (220, 348))

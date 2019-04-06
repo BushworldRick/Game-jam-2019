@@ -8,7 +8,6 @@ from copy import deepcopy
 
 NUM_ENEMIES = 30
 
-
 class Map:
     def __init__(self,code_good):
         self.win_width = win_width
@@ -37,7 +36,7 @@ class Map:
             print(TheEnd_dict)
             key = choice(list(TheEnd_dict.keys()))
             letter = TheEnd_dict[key]
-            self.mPreset_enemies.append(Enemy(spwn_x, spwn_x, str(letter)))
+            self.mPreset_enemies.append(Enemy(spwn_x, -50, str(letter)))
             del TheEnd_dict[key]
             num -= 1
         self.mEnemies = [deepcopy(self.mPreset_enemies[0])]
@@ -50,6 +49,9 @@ class Map:
         self.mAdd_phase = True
         self.hp_bar = pygame.image.load("Sprites/hp_gradient.png")
         self.mFont = pygame.font.SysFont("Times New Roman", 50)
+        self.mEnemy_bullets = []
+        self.mEnemy_bullet_timer = 1.5
+
 
         #player thing
         self.Player = Player((800, 600), code_good, SHIP)
@@ -57,7 +59,8 @@ class Map:
 
     def update(self, dt, code):
         self.code_good = code
-        print(str(self.code_good) + " map class")
+        self.mEnemy_bullet_timer -= dt
+        #print(str(self.code_good) + " map class")
 
         if self.Enemy_index < self.mNum_enemies:
             self.Enemy_delay -= dt
@@ -71,10 +74,18 @@ class Map:
         # print(len(self.mEnemies), "number of enemies")
         if len(self.mEnemies) > 0:
             for e in self.mEnemies:
-                e.update(dt)
+                spwn_bullets = e.update(dt)
+                if spwn_bullets:
+                    self.mEnemy_bullets.append(e.attack())
+                    self.mEnemy_bullet_timer = 1.5
                 # print(e.mPos[1])
                 if e.mPos[1] > 810:
                     self.mEnemies.remove(e)
+
+        for group in self.mEnemy_bullets:
+            for bullet in group:
+                bullet[1] += bullet[2][1] * dt
+                bullet[0] += bullet[2][0] * dt
 
         for enemy in self.mEnemies:
             if enemy.pars_y <= 8:
@@ -113,6 +124,11 @@ class Map:
     def draw(self, win):
 
         self.Player.draw(win)
+
+        for bullet_group in self.mEnemy_bullets:
+            for bullet in bullet_group:
+                win.blit(BULLET, (int(bullet[0]), int(bullet[1])))
+                #pygame.draw.circle(win, (255, 0, 0), (int(bullet[0]), int(bullet[1])), 5)
 
         if len(self.mEnemies) > 0:
             for e in self.mEnemies:

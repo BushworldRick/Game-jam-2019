@@ -15,7 +15,7 @@ class Player:
 
         # player stuff
         self.player_pos = [self.screenwidth//2, 500]
-        self.speed = 150
+        self.speed = 200
         self.player_hitbox = ship_directions["framewidth"]//2
         self.bullet_list = []   # bullet class objects
         self.frame_row = 6
@@ -34,7 +34,7 @@ class Player:
     def update(self, dt, code):
         self.dt = dt
         self.code_good = code
-        print(str(self.code_good) + " player class")
+        #print(str(self.code_good) + " player class")
 
         # Bullet Update
         for b in self.bullet_list:
