@@ -18,7 +18,6 @@ class Map:
         self.Enemy_index = 1
         self.bullet_list = []
 
-
     def update(self, dt):
 
         if self.Enemy_index < NUM_ENEMIES:

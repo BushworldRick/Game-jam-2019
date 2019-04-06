@@ -47,7 +47,7 @@ class Boss:
 
 
     def input(self, evt, keys):
-        self.Map.Player.input(keys)
+        self.Map.Player.input(evt, keys)
 
     def draw(self, win):
         self.Map.Player.draw(win)

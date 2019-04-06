@@ -3,7 +3,7 @@ import pygame
 
 class Bullet:
     def __init__(self, position, dir=1):
-        self.pos = position
+        self.pos = position.copy()
         self.dir = dir
         self.speed = 300
         self.rad = 3
