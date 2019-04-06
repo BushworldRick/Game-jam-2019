@@ -9,7 +9,7 @@ class Player:
         self.screenheight = screen_dems[1]
 
         # player stuff
-        self.pos = [screenwidth//2,500]
+        self.pos = [self.screenwidth//2,500]
         self.speed = 150
         self.player_hitbox = 15
         self.bullets = []   # bullet class objects
@@ -47,4 +47,4 @@ class Player:
 
     def draw(self,surf):
         # temorary player
-        pygame.draw.rect(surf, (0,255,0), self.pos, 15)
+        pygame.draw.circle(surf, (0,255,0), (int(self.pos[0]), int(self.pos[1])), 15)

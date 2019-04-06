@@ -1,10 +1,6 @@
 from map import *
 
 # Pygame startup
-win_width = 800
-win_height = 600
-pygame.init()
-win = pygame.display.set_mode((win_width, win_height))
 clock = pygame.time.Clock()
 done = False
 
