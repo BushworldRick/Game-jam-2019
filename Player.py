@@ -27,10 +27,10 @@ class Player:
             self.pos[0] = 0 + self.player_hitbox
         if self.pos[0] > self.screenwidth - self.player_hitbox:
             self.pos[0] = self.screenwidth - self.player_hitbox
-        if self.pos[1] < 0 + self.player_hitbox:
-            self.pos[1] = 0 + self.player_hitbox
-        if self.pos[1] > self.screenheight - self.player_hitbox:
-            self.pos[1] = self.screenheight - self.player_hitbox
+        if self.pos[1] < 0 + (self.player_hitbox * 2):
+            self.pos[1] = 0 + (self.player_hitbox * 2)
+        if self.pos[1] > self.screenheight - (self.player_hitbox *  2):
+            self.pos[1] = self.screenheight - (self.player_hitbox * 2)
 
     def input(self, keys):
         # Moving player_ship
