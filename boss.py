@@ -18,16 +18,41 @@ class Boss:
         self.mAdd_phase = False
         self.mBullet_cooldown = 1
 
+        # text box / timer stuff
+        self.print1 = False
+        self.font = pygame.font.SysFont("Bahnschrift", 16)
+        self.print1_text = "Hah i'm gonona get you fool, ya fool!"
+        self.print2 = False
+        self.print2_text = "Figure out the code to leave fool, ya fool!"
+        self.x = 0
+        self.text_timer = 1.5
+        self.text_box = pygame.Surface((315,50))
+
     def update(self, dt):
         self.mBoss_timer -= dt
         self.Map.Player.update(dt)
 
-        if self.mBoss_timer > 0:
+        if self.print1 == True:
+            #print("it works")
+            self.x += dt
+            if self.x > self.text_timer:
+                self.print1 = False
+                self.x = 0
+        if self.print2 == True:
+            #print("it works")
+            self.x += dt
+            if self.x > self.text_timer:
+                self.print2 = False
+                self.x = 0
+
+        if self.mBoss_timer > 0:        #this is where the boss stops
             if self.position[1] < 75:
                 self.position[1] += self.speed * dt
+                self.print1 = True
 
         if self.mBoss_timer <= 0:
             self.position[1] -= self.speed * dt
+            self.print2 = True
 
         self.mBullet_cooldown -= dt
         if self.mBullet_cooldown < 0:
@@ -68,6 +93,7 @@ class Boss:
         self.mBoss_timer = 10
 
     def draw(self, win):
+
         self.Map.Player.draw(win)
         for bullet_group in self.mBullet_list:
             for bullet in bullet_group:
@@ -77,6 +103,13 @@ class Boss:
         pygame.draw.rect(win, (255, 255, 0), (15, 15, 200, 10), 1)
         pygame.draw.rect(win, (255, 255, 0), (15, 15, int(self.mHealth/5), 10))
 
+        if self.print1 == True:
+            win.blit(self.text_box,(self.position[0],self.position[1] + 250))
+            self.text_box.fill((255,255,255))
+            self.text_box.blit(self.font.render(self.print1_text, True, (0,0,0)),(15,15))
+            #self.chest_screen.blit(self.font.render(str(text[0]), True, (0, 0, 0)),(35, 20))
 
-
-
+        if self.print2 == True:
+            win.blit(self.text_box,(self.position[0],self.position[1] + 250))
+            self.text_box.fill((255,255,255))
+            self.text_box.blit(self.font.render(self.print2_text, True, (0,0,0)),(15,15))
