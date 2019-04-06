@@ -17,7 +17,7 @@ class Boss:
         self.mBoss_phase = True
         self.mAdd_phase = False
         self.mBullet_cooldown = 1
-        self.enemy_box = (self.position[0] - (self.mBoss_w / 2), self.position[1] - (self.mBoss_h / 2), self.mBoss_w, self.mBoss_h)
+        self.enemy_box = pygame.Rect(self.position[0] - (self.mBoss_w / 2), self.position[1] - (self.mBoss_h / 2), self.mBoss_w, self.mBoss_h)
 
         # text box / timer stuff
         self.print1 = False
@@ -27,26 +27,26 @@ class Boss:
         self.print2_text = "Figure out the code to leave fool, ya fool!"
         self.x = 0
         self.text_timer = 1.5
-        self.text_box = pygame.Surface((315,50))
+        self.text_box = pygame.Surface((315, 50))
 
     def update(self, dt):
         self.mBoss_timer -= dt
         self.Map.Player.update(dt)
 
-        if self.print1 == True:
-            #print("it works")
+        if self.print1:
+            # print("it works")
             self.x += dt
             if self.x > self.text_timer:
                 self.print1 = False
                 self.x = 0
-        if self.print2 == True:
-            #print("it works")
+        if self.print2:
+            # print("it works")
             self.x += dt
             if self.x > self.text_timer:
                 self.print2 = False
                 self.x = 0
 
-        if self.mBoss_timer > 0:        #this is where the boss stops
+        if self.mBoss_timer > 0:        # this is where the boss stops
             if self.position[1] < 75:
                 self.position[1] += self.speed * dt
                 self.print1 = True
@@ -64,6 +64,13 @@ class Boss:
             for bullet in group:
                 bullet[1] += bullet[2][1] * dt
                 bullet[0] += bullet[2][0] * dt
+
+        for i in self.Map.Player.bullet_list:
+            bul_rect = pygame.Rect(i.pos[0] - 3, i.pos[1] + 3, 6, 6)
+            collide = bul_rect.colliderect(self.enemy_box)
+            if collide:
+                self.mHealth -= self.Map.Player.attack
+                self.Map.Player.bullet_list.remove(i)
 
     def attack1(self, spwn_x, spwn_y):
         x_rate = 50
@@ -92,6 +99,7 @@ class Boss:
         self.mAdd_phase = False
         self.mBoss_phase = True
         self.mBoss_timer = 10
+        self.mHealth = 1000
 
     def draw(self, win):
 
@@ -104,15 +112,15 @@ class Boss:
         pygame.draw.rect(win, (255, 255, 0), (15, 15, 200, 10), 1)
         pygame.draw.rect(win, (255, 255, 0), (15, 15, int(self.mHealth/5), 10))
 
-        if self.print1 == True:
-            win.blit(self.text_box,(self.position[0],self.position[1] + 250))
-            self.text_box.fill((255,255,255))
-            self.text_box.blit(self.font.render(self.print1_text, True, (0,0,0)),(15,15))
-            #self.chest_screen.blit(self.font.render(str(text[0]), True, (0, 0, 0)),(35, 20))
+        if self.print1:
+            win.blit(self.text_box, (self.position[0], self.position[1] + 250))
+            self.text_box.fill((255, 255, 255))
+            self.text_box.blit(self.font.render(self.print1_text, True, (0, 0, 0)), (15, 15))
+            # self.chest_screen.blit(self.font.render(str(text[0]), True, (0, 0, 0)),(35, 20))
 
-        if self.print2 == True:
-            win.blit(self.text_box,(self.position[0],self.position[1] + 250))
-            self.text_box.fill((255,255,255))
-            self.text_box.blit(self.font.render(self.print2_text, True, (0,0,0)),(15,15))
+        if self.print2:
+            win.blit(self.text_box, (self.position[0], self.position[1] + 250))
+            self.text_box.fill((255, 255, 255))
+            self.text_box.blit(self.font.render(self.print2_text, True, (0, 0, 0)), (15, 15))
 
-        pygame.draw.ellipse(win, (255, 255, 255), (self.position[0] - (self.mBoss_w / 2), self.position[1] - (self.mBoss_h / 2), self.mBoss_w, self.mBoss_h), 2)
+        pygame.draw.rect(win, (255, 255, 255), (self.position[0] - (self.mBoss_w / 2), self.position[1] - (self.mBoss_h / 2), self.mBoss_w, self.mBoss_h), 2)
