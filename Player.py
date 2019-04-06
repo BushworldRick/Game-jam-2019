@@ -4,7 +4,10 @@ from bullet import *
 
 
 class Player:
-    def __init__(self, screen_dems, img=None):
+    def __init__(self, screen_dems, code, img=None):
+
+        # fancy code stuff
+        self.code_good = False
 
         # screen dimensions
         self.screenwidth = screen_dems[0]
@@ -28,8 +31,10 @@ class Player:
         self.img_w = ship_directions["frameheight"]
         self.img_h = ship_directions["frameheight"]
 
-    def update(self, dt):
+    def update(self, dt, code):
         self.dt = dt
+        self.code_good = code
+        print(str(self.code_good) + " player class")
 
         # Bullet Update
         for b in self.bullet_list:
@@ -74,11 +79,11 @@ class Player:
 
         if keys[pygame.K_SPACE]:
             self.x += self.dt
-            # print(self.x)
+            print(self.code_good)
             if self.x >= self.timer:
-                self.bullet_list.append(Bullet(self.player_pos, 1))
-                self.bullet_list.append(Bullet(self.player_pos, 2))
-                self.bullet_list.append(Bullet(self.player_pos, 3))
+                self.bullet_list.append(Bullet(self.player_pos, self.code_good,1))
+                self.bullet_list.append(Bullet(self.player_pos, self.code_good,2))
+                self.bullet_list.append(Bullet(self.player_pos, self.code_good,3))
                 self.x = 0
 
     def draw(self,surf):

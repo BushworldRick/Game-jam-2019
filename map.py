@@ -10,10 +10,10 @@ NUM_ENEMIES = 20
 
 
 class Map:
-    def __init__(self):
+    def __init__(self,code_good):
         self.win_width = win_width
         self.win_height = win_height
-        self.Player = Player((800, 600), SHIP)
+        self.code_good = code_good
         self.mPreset_enemies = []
         for i in range(NUM_ENEMIES):
             spwn_x = randint(0, win_width)
@@ -27,7 +27,14 @@ class Map:
         self.mAdd_phase = True
         self.hp_bar = pygame.image.load("Sprites/hp_gradient.png")
 
-    def update(self, dt):
+        #player thing
+        self.Player = Player((800, 600), code_good, SHIP)
+
+
+    def update(self, dt, code):
+        self.code_good = code
+        print(str(self.code_good) + " map class")
+
         if self.Enemy_index < NUM_ENEMIES:
             self.Enemy_delay -= dt
             if self.Enemy_delay < 0:
@@ -35,7 +42,7 @@ class Map:
                 self.Enemy_index += 1
                 self.Enemy_delay = 0.5
 
-        self.Player.update(dt)
+        self.Player.update(dt,self.code_good)
 
 
         #print(len(self.mEnemies), "number of enemies")

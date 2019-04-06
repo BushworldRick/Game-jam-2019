@@ -7,14 +7,15 @@ import random
 clock = pygame.time.Clock()
 done = False
 
-my_map = Map()
-boss = Boss(win_width/2, -200, my_map)
-term = Terminal()
-
 boss_phase = False
 add_phase = True
 terminal_phase = False
 code_good = False
+
+my_map = Map(code_good)
+boss = Boss(win_width/2, -200, my_map)
+term = Terminal()
+
 
 max_stars = 200
 stars = []
@@ -32,11 +33,12 @@ while not done:
     # Update
     dt = clock.tick() / 1000.0
     if add_phase:
-        my_map.update(dt)
+        my_map.update(dt, code_good)
     elif boss_phase:
         boss.update(dt)
     elif terminal_phase:
         code_good = term.update(dt)
+        print(str(code_good) + " main")
     for star in stars:
         star[1] += star[3] * dt
         if star[1] > star[2] + 600:
@@ -72,6 +74,7 @@ while not done:
             add_phase = False
         if terminal_phase:
             if evt.key == pygame.K_TAB:
+                print("it quit")
                 terminal_phase = False
                 add_phase = True
 
