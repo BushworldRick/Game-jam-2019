@@ -8,11 +8,12 @@ from copy import deepcopy
 
 NUM_ENEMIES = 20
 
+
 class Map:
     def __init__(self):
         self.win_width = win_width
         self.win_height = win_height
-        self.Player = Player((800,600), SHIP)
+        self.Player = Player((800, 600), SHIP)
         self.mPreset_enemies = []
         for i in range(NUM_ENEMIES):
             spwn_x = randint(0, win_width)
@@ -26,9 +27,7 @@ class Map:
         self.mAdd_phase = True
         self.hp_bar = pygame.image.load("Sprites/hp_gradient.png")
 
-
     def update(self, dt):
-
         if self.Enemy_index < NUM_ENEMIES:
             self.Enemy_delay -= dt
             if self.Enemy_delay < 0:
@@ -54,12 +53,12 @@ class Map:
         self.mDel_enemies = False
 
     def input(self, evt, keys):
-        self.Player.input(evt,keys)
+        self.Player.input(evt, keys)
         print(len(self.mEnemies))
         print(self.Enemy_index, "enemy index")
         if len(self.mEnemies) == 0:
             self.mEnemies = [deepcopy(self.mPreset_enemies[0])]
-            return True,False
+            return True, False
         return self.mBoss_phase, self.mAdd_phase
 
     def draw(self, win):

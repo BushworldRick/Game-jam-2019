@@ -57,7 +57,7 @@ class Boss:
 
         if self.position[1] < -300:
             self.position[1] = -299
-            return False,True
+            return False, True
 
         return self.mBoss_phase, self.mAdd_phase
 
@@ -72,8 +72,8 @@ class Boss:
         self.Map.Player.draw(win)
         for bullet_group in self.mBullet_list:
             for bullet in bullet_group:
-                pygame.draw.circle(win ,(255, 0, 0), (int(bullet[0]), int(bullet[1])), 5,)
-        win.blit(self.mBoss_image, (self.position[0] - (self.mBoss_w/2), self.position[1] - (self.mBoss_h/2)),)
+                pygame.draw.circle(win, (255, 0, 0), (int(bullet[0]), int(bullet[1])), 5)
+        win.blit(self.mBoss_image, (self.position[0] - (self.mBoss_w/2), self.position[1] - (self.mBoss_h/2)))
 
         pygame.draw.rect(win, (255, 255, 0), (15, 15, 200, 10), 1)
         pygame.draw.rect(win, (255, 255, 0), (15, 15, int(self.mHealth/5), 10))

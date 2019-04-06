@@ -23,7 +23,7 @@ ENEMY = pygame.transform.scale(ENEMY, (img_w, img_h)).convert()
 ENEMY = pygame.transform.rotate(ENEMY, math.pi)
 ENEMY.set_colorkey((0, 0, 0))
 enemy_directions = {"left": 1, "right": 3, "up": 0, "down": 2, "frameheight": 64, "framewidth": 64, "frames_wide": 8,
-                     "x_offset": 15, "y_offset": 5}
+                    "x_offset": 15, "y_offset": 5}
 
 # Boss Sprite
 BOSS = pygame.image.load("Sprites/PossibleBoss1.png")
@@ -33,7 +33,7 @@ BOSS = pygame.transform.scale(BOSS, (img_w, img_h)).convert()
 BOSS.set_colorkey((255, 0, 255))
 BOSS.set_alpha(255)
 boss_directions = {"left": 1, "right": 3, "up": 0, "down": 2, "frameheight": 64, "framewidth": 64, "frames_wide": 8,
-                     "x_offset": 15, "y_offset": 5}
+                   "x_offset": 15, "y_offset": 5}
 
 # Terminal Image
 TERM = pygame.image.load("Sprites/futuristicScreen.jpg")
@@ -46,6 +46,6 @@ img_h = int(img_h * height_scalar)
 TERM = pygame.transform.scale(TERM, (img_w, img_h))
 
 # dictionary of the keys
-Keys_info = {"97":'a', "98":'b', "99":'c', "100":'d', "101":'e', "102":'f', "103":'g', "104":'h',"105":'i',
-"106":'j',"107":'k',"108":'l', "109":'m',"110":'n',"111":'o',"112":'p',"113":'q',"114":'r',"115":'s',"116":'t',"117":'u',
-"118":'v',"119":'w',"120":'x',"121":'y',"122":'z'}
+Keys_info = {"97": 'a', "98": 'b', "99": 'c', "100": 'd', "101": 'e', "102": 'f', "103": 'g', "104": 'h', "105": 'i',
+             "106": 'j', "107": 'k', "108": 'l', "109": 'm', "110": 'n', "111": 'o', "112": 'p', "113": 'q', "114": 'r',
+             "115": 's', "116": 't', "117": 'u', "118": 'v', "119": 'w', "120": 'x', "121": 'y', "122": 'z'}

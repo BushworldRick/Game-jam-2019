@@ -2,15 +2,16 @@ import pygame
 from config import *
 from bullet import *
 
+
 class Player:
-    def __init__(self,screen_dems, img = None):
+    def __init__(self, screen_dems, img=None):
 
         # screen dimensions
         self.screenwidth = screen_dems[0]
         self.screenheight = screen_dems[1]
 
         # player stuff
-        self.player_pos = [self.screenwidth//2,500]
+        self.player_pos = [self.screenwidth//2, 500]
         self.speed = 150
         self.player_hitbox = ship_directions["framewidth"]//2
         self.bullet_list = []   # bullet class objects
@@ -29,7 +30,7 @@ class Player:
     def update(self, dt):
         self.dt = dt
 
-        #bullet Update
+        # Bullet Update
         for b in self.bullet_list:
             b.update(dt)
 
@@ -46,7 +47,7 @@ class Player:
         for b in self.bullet_list:
             if b.pos[1] < 0:
                 self.bullet_list.remove(b)
-        #print(len(self.bullet_list))
+        # print(len(self.bullet_list))
 
     def input(self, evt, keys):
         # Moving player_ship
@@ -72,22 +73,20 @@ class Player:
 
         if keys[pygame.K_SPACE]:
             self.x += self.dt
-            #print(self.x)
+            # print(self.x)
             if self.x >= self.timer:
                 self.bullet_list.append(Bullet(self.player_pos, 1))
                 self.bullet_list.append(Bullet(self.player_pos, 2))
                 self.bullet_list.append(Bullet(self.player_pos, 3))
                 self.x = 0
 
-
     def draw(self,surf):
-        # temorary player
-        pygame.draw.circle(surf, (0,255,0), (int(self.player_pos[0]), int(self.player_pos[1])), self.player_hitbox, 1)
+        # temporary player
+        pygame.draw.circle(surf, (0, 255, 0), (int(self.player_pos[0]), int(self.player_pos[1])), self.player_hitbox, 1)
 
-        rect = (self.img_w * self.frame_column, self.img_h * self.frame_row,
-        self.img_w, self.img_h)
+        rect = (self.img_w * self.frame_column, self.img_h * self.frame_row, self.img_w, self.img_h)
 
         for i in self.bullet_list:
             i.draw(win)
 
-        surf.blit(self.img, (int(self.player_pos[0] - (self.img_w/2 + 15)),int(self.player_pos[1] - (self.img_h/2 + 15))), rect)
+        surf.blit(self.img, (int(self.player_pos[0] - (self.img_w/2 + 15)), int(self.player_pos[1] - (self.img_h/2 + 15))), rect)
