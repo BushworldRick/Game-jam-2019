@@ -37,6 +37,7 @@ class Map:
 
         self.Player.update(dt)
 
+
         #print(len(self.mEnemies), "number of enemies")
         if len(self.mEnemies) > 0:
             for e in self.mEnemies:
@@ -44,6 +45,18 @@ class Map:
                 #print(e.mPos[1])
                 if e.mPos[1] > 810:
                     self.mEnemies.remove(e)
+
+        for bullet in self.Player.bullet_list:
+            b_x = bullet.pos[0]
+            b_y = bullet.pos[1]
+            for enemy in self.mEnemies:
+                e_x = enemy.mPos[0]
+                e_y = enemy.mPos[1]
+                a = e_x - b_x
+                b = e_y - b_y
+                distance = (a * a + b * b) ** 0.5
+                if distance < bullet.rad + enemy.mEnemy_rad:
+                    self.mEnemies.remove(enemy)
 
     def reset(self):
         self.Enemy_index = 1

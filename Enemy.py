@@ -13,11 +13,12 @@ class Enemy:
         self.mid_x = x
         self.Speed = 0.1
         self.mRate = 100
+        self.mEnemy_rad = 18
 
     def update(self, dt):
         self.mPos[1] += self.mRate * dt
         self.mPos[0] = math.sin(self.mPos[1] * .05) * self.mSin_width + self.mid_x
 
     def draw(self, win):
-        win.blit(ENEMY, (int(self.mPos[0] - 20), int(self.mPos[1]) - (45/2)), (5, 10, 40, 45))
-        pygame.draw.circle(win, (255, 0, 0), (int(self.mPos[0]), int(self.mPos[1])), 25, 1)
+        win.blit(ENEMY, (int(self.mPos[0] - (35/2)), int(self.mPos[1]) - (40/2)), (5, 10, 35, 40))
+        pygame.draw.circle(win, (255, 0, 0), (int(self.mPos[0]), int(self.mPos[1]) - 5), self.mEnemy_rad, 1)

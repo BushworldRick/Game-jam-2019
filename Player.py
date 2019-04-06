@@ -34,6 +34,7 @@ class Player:
         for b in self.bullet_list:
             b.update(dt)
 
+        print(self.bullet_list)
         # keep on screen code
         if self.player_pos[0] < 0 + self.player_hitbox:
             self.player_pos[0] = 0 + self.player_hitbox
