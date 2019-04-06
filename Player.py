@@ -16,6 +16,8 @@ class Player:
         self.bullet_list = []   # bullet class objects
         self.frame_row = 6
         self.frame_column = 0
+        self.timer = .3
+        self.x = 0
 
         # stuff for the image
         self.img = img
@@ -39,6 +41,11 @@ class Player:
         if self.player_pos[1] > self.screenheight - (self.player_hitbox *  2):
             self.player_pos[1] = self.screenheight - (self.player_hitbox * 2)
 
+        for b in self.bullet_list:
+            if b.pos[1] < 0:
+                self.bullet_list.remove(b)
+        #print(len(self.bullet_list))
+
     def input(self, evt, keys):
         # Moving player_ship
         if keys[pygame.K_a] or keys[pygame.K_LEFT]:
@@ -60,11 +67,16 @@ class Player:
             self.player_pos[1] += self.speed * self.dt
 
         # make bullet list
-        if evt.type == pygame.KEYDOWN:
-            if evt.key == pygame.K_SPACE:
+
+        if keys[pygame.K_SPACE]:
+            self.x += self.dt
+            #print(self.x)
+            if self.x >= self.timer:
                 self.bullet_list.append(Bullet(self.player_pos, 1))
                 self.bullet_list.append(Bullet(self.player_pos, 2))
                 self.bullet_list.append(Bullet(self.player_pos, 3))
+                self.x = 0
+
 
     def draw(self,surf):
         # temorary player
