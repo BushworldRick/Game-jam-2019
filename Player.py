@@ -21,6 +21,7 @@ class Player:
         self.x = 0
         self.max_health = 100
         self.health = 100
+        self.attack = 1
 
         # stuff for the image
         self.img = img
