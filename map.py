@@ -51,7 +51,6 @@ class Map:
         self.hp_bar = pygame.image.load("Sprites/hp_gradient.png")
         self.mFont = pygame.font.SysFont("Times New Roman", 50)
 
-<<<<<<< HEAD
         #player thing
         self.Player = Player((800, 600), code_good, SHIP)
 
@@ -60,11 +59,7 @@ class Map:
         self.code_good = code
         print(str(self.code_good) + " map class")
 
-        if self.Enemy_index < NUM_ENEMIES:
-=======
-    def update(self, dt):
         if self.Enemy_index < self.mNum_enemies:
->>>>>>> 2be83f3cbcf71cec2bc2d83140fc22ff8f67a93a
             self.Enemy_delay -= dt
             if self.Enemy_delay < 0:
                 self.mEnemies.append(deepcopy(self.mPreset_enemies[self.Enemy_index]))

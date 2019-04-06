@@ -10,15 +10,10 @@ class Terminal:
         self.keys = Keys_info
         self.timer = 1
         self.x = 0
-<<<<<<< HEAD
         self.not_available = False      # checking for wrong key press thing
         self.solutions = ["Code: the end","Code: theend"]
         self.code_good = False
         self.locked_input = ''
-=======
-        self.not_available = False
-        self.solutions = ["Code: the end", "Code: theend"]
->>>>>>> 2be83f3cbcf71cec2bc2d83140fc22ff8f67a93a
 
     def update(self, dt):
 
@@ -31,7 +26,6 @@ class Terminal:
                 self.x = 0
                 self.term_string = "Code: "
                 self.not_available = False
-<<<<<<< HEAD
 
         for s in self.solutions:
             if s == self.locked_input:
@@ -39,11 +33,6 @@ class Terminal:
                 #print(self.code_good)
         return self.code_good
 
-=======
-                if self.term_string == "Code: the end" or self.term_string == "Code: theend":
-                    code = True
-                    return code
->>>>>>> 2be83f3cbcf71cec2bc2d83140fc22ff8f67a93a
 
     def input(self, evt, keys):
         if evt.type == pygame.KEYDOWN:
