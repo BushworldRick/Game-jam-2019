@@ -66,6 +66,10 @@ while not done:
         if evt.key == pygame.K_p and boss_phase is not True:
             terminal_phase = True
             add_phase = False
+        if terminal_phase:
+            if evt.key == pygame.K_TAB:
+                terminal_phase = False
+                add_phase = True
 
     # Drawing
     win.fill((0, 0, 0))

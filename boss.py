@@ -16,7 +16,6 @@ class Boss:
         self.mBoss_timer = 10
         self.mBoss_phase = True
         self.mAdd_phase = False
-
         self.mBullet_cooldown = 1
 
     def update(self, dt):
