@@ -8,8 +8,8 @@ done = False
 my_map = Map()
 boss = Boss(win_width/2, -200, my_map)
 
-boss_phase = False
-add_phase = True
+boss_phase = True
+add_phase = False
 
 max_stars = 200
 stars = []
