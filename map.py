@@ -55,8 +55,13 @@ class Map:
                 a = e_x - b_x
                 b = e_y - b_y
                 distance = (a * a + b * b) ** 0.5
-                if distance < bullet.rad + enemy.mEnemy_rad:
-                    enemy.explode()
+                if enemy.pars_y == 323:
+                    if distance < bullet.rad + enemy.mEnemy_rad:
+                        enemy.explode()
+                        self.Player.bullet_list.remove(bullet)
+                        if enemy.pars_y < -77:
+                            self.mEnemies.remove(enemy)
+                        break
 
     def reset(self):
         self.Enemy_index = 1
