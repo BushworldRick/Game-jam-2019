@@ -23,13 +23,13 @@ class Player:
         self.dt = dt
 
         # keep on screen code
-        if self.pos[0] < 0:
+        if self.pos[0] < 0 + self.player_hitbox:
             self.pos[0] = 0 + self.player_hitbox
-        if self.pos[0] > self.screenwidth:
+        if self.pos[0] > self.screenwidth - self.player_hitbox:
             self.pos[0] = self.screenwidth - self.player_hitbox
-        if self.pos[1] < 0:
+        if self.pos[1] < 0 + self.player_hitbox:
             self.pos[1] = 0 + self.player_hitbox
-        if self.pos[1] > self.screenheight:
+        if self.pos[1] > self.screenheight - self.player_hitbox:
             self.pos[1] = self.screenheight - self.player_hitbox
 
     def input(self, keys):
