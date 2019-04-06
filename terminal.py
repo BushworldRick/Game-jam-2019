@@ -11,6 +11,7 @@ class Terminal:
         self.timer = 1
         self.x = 0
         self.not_available = False
+        self.solutions = ["Code: the end","Code: theend"]
 
     def update(self, dt):
 
@@ -27,7 +28,7 @@ class Terminal:
     def input(self, evt, keys):
         if evt.type == pygame.KEYDOWN:
             x = evt.key
-            # print(x)
+            print(x)
             if str(x) in self.keys:
                 # self.term_string = "Code: "
                 self.term_string += self.keys[str(x)]
