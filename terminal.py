@@ -13,6 +13,7 @@ class Terminal:
         self.not_avalible = False
 
     def update(self, dt):
+<<<<<<< HEAD
 
         #self.x+=dt
         if self.not_avalible == True:
@@ -23,6 +24,12 @@ class Terminal:
                 self.x = 0
                 self.term_string = "Code: "
                 self.not_avalible = False
+=======
+        pass
+        # print(self.keys)
+        # for nums in Keys_info:
+            # print(nums)
+>>>>>>> f094e4a868c91fef0cf1467ac38a5695dbab687b
 
     def input(self, evt, keys):
         if evt.type == pygame.KEYDOWN:
@@ -40,7 +47,3 @@ class Terminal:
     def draw(self, win):
         win.blit(self.image, (0, 0, win_width, win_height))
         win.blit(self.font.render(self.term_string, True, (255, 255, 255)), (245, 170))
-
-        # Fonts
-        # Vixar ASCI
-        # Quartz MS

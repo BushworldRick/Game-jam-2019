@@ -17,8 +17,8 @@ terminal_phase = False
 max_stars = 200
 stars = []
 for i in range(max_stars):
-    x,y = randint(0, 800), randint(0, 600)
-    rad,spd = randint(2, 5), randint(100, 150)
+    x, y = randint(0, 800), randint(0, 600)
+    rad, spd = randint(2, 5), randint(100, 150)
     star = [x, y, rad, spd]
     stars.append(star)
 
@@ -43,7 +43,7 @@ while not done:
         list2 = my_map.input(evt, keys)
         boss_phase = list2[0]
         add_phase = list2[1]
-        if add_phase == False:
+        if not add_phase:
             my_map.reset()
             boss_phase = True
             add_phase = False
@@ -51,7 +51,7 @@ while not done:
         list = boss.input(evt, keys)
         boss_phase = list[0]
         add_phase = list[1]
-        if boss_phase == False:
+        if not boss_phase:
             boss.reset()
             boss_phase = False
             add_phase = True
@@ -67,13 +67,12 @@ while not done:
             terminal_phase = True
             add_phase = False
 
-
     # Drawing
     win.fill((0, 0, 0))
     for star in stars:
         x = star[0]
         y = star[1]
-        pygame.draw.circle(win, (220, 220, 220), (int(x), int(y)), star[2], )
+        pygame.draw.circle(win, (220, 220, 220), (int(x), int(y)), star[2])
     if add_phase:
         my_map.draw(win)
     elif boss_phase:
