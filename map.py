@@ -33,7 +33,7 @@ class Map:
             self.mEnemies[i].update(dt)
 
     def input(self, evt, keys):
-        self.Player.input(evt,keys)
+        self.Player.input(evt, keys)
 
 
     def draw(self, win):

@@ -1,5 +1,6 @@
 from map import *
 from boss import *
+from terminal import *
 
 # Pygame startup
 clock = pygame.time.Clock()
@@ -7,9 +8,11 @@ done = False
 
 my_map = Map()
 boss = Boss(win_width/2, -200, my_map)
+term = Terminal()
 
-boss_phase = True
-add_phase = False
+boss_phase = False
+add_phase = True
+terminal_phase = False
 
 max_stars = 200
 stars = []
@@ -18,6 +21,8 @@ for i in range(max_stars):
     rad,spd = randint(2, 5), randint(100, 150)
     star = [x, y, rad, spd]
     stars.append(star)
+
+term_string = "Code: "
 
 while not done:
     # Update
@@ -43,6 +48,12 @@ while not done:
     elif evt.type == pygame.KEYDOWN:
         if evt.key == pygame.K_ESCAPE:
             done = True
+        if terminal_phase:
+            term_string += str(keys)
+        if evt.key == pygame.K_p and boss_phase is not True:
+            terminal_phase = True
+            add_phase = False
+
 
     # Drawing
     win.fill((0, 0, 0))
@@ -54,6 +65,8 @@ while not done:
         my_map.draw(win)
     elif boss_phase:
         boss.draw(win)
+    elif terminal_phase:
+        term.draw(win, term_string)
     pygame.display.flip()
 
 pygame.quit()
