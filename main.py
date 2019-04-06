@@ -18,9 +18,9 @@ terminal_phase = False
 max_stars = 200
 stars = []
 for i in range(max_stars):
-    x, y = randint(0, 800), randint(0, 600)
+    x, y, rgb = randint(0, 800), randint(0, 600), randint(75, 200)
     rad, spd = randint(2, 5), randint(100, 150)
-    star = [x, y, rad, spd]
+    star = [x, y, rad, spd, rgb]
     stars.append(star)
 
 while not done:
@@ -73,7 +73,7 @@ while not done:
     for star in stars:
         x = star[0]
         y = star[1]
-        rgb = random.randint(100, 255)
+        rgb = star[4]
         pygame.draw.circle(win, (rgb, rgb, rgb), (int(x), int(y)), star[2])
 
     pcent = my_map.Player.health / my_map.Player.max_health
