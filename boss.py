@@ -47,7 +47,7 @@ class Boss:
 
 
     def input(self, evt, keys):
-        self.Map.Player.input(keys)
+        self.Map.Player.input(evt,keys)
 
     def draw(self, win):
         self.Map.Player.draw(win)
@@ -55,7 +55,3 @@ class Boss:
             for bullet in bullet_group:
                 pygame.draw.circle(win ,(255, 0, 0), (int(bullet[0]), int(bullet[1])), 5,)
         win.blit(self.mBoss_image, (self.position[0] - (self.mBoss_w/2), self.position[1] - (self.mBoss_h/2)))
-
-
-
-
