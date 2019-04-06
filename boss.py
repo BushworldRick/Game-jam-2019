@@ -17,7 +17,7 @@ class Boss:
         self.mBoss_phase = True
         self.mAdd_phase = False
         self.mBullet_cooldown = 1
-        self.enemy_box = (self.position[0] - (self.mBoss_w / 2), self.position[1] - (self.mBoss_h / 2), self.mBoss_w, self.mBoss_h)
+        self.enemy_box = pygame.Rect(self.position[0] - (self.mBoss_w / 2), self.position[1] - (self.mBoss_h / 2), self.mBoss_w, self.mBoss_h)
 
         # text box / timer stuff
         self.print1 = False
@@ -65,6 +65,13 @@ class Boss:
                 bullet[1] += bullet[2][1] * dt
                 bullet[0] += bullet[2][0] * dt
 
+        for i in self.Map.Player.bullet_list:
+            bul_rect = pygame.Rect(i.pos[0] - 3, i.pos[1] + 3, 6, 6)
+            collide = bul_rect.colliderect(self.enemy_box)
+            if collide:
+                self.mHealth -= self.Map.Player.attack
+                self.Map.Player.bullet_list.remove(i)
+
     def attack1(self, spwn_x, spwn_y):
         x_rate = 50
         y_rate = 150
@@ -92,6 +99,7 @@ class Boss:
         self.mAdd_phase = False
         self.mBoss_phase = True
         self.mBoss_timer = 10
+        self.mHealth = 1000
 
     def draw(self, win):
 
@@ -115,4 +123,4 @@ class Boss:
             self.text_box.fill((255, 255, 255))
             self.text_box.blit(self.font.render(self.print2_text, True, (0, 0, 0)), (15, 15))
 
-        pygame.draw.ellipse(win, (255, 255, 255), (self.position[0] - (self.mBoss_w / 2), self.position[1] - (self.mBoss_h / 2), self.mBoss_w, self.mBoss_h), 2)
+        pygame.draw.rect(win, (255, 255, 255), (self.position[0] - (self.mBoss_w / 2), self.position[1] - (self.mBoss_h / 2), self.mBoss_w, self.mBoss_h), 2)
