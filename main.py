@@ -6,7 +6,7 @@ clock = pygame.time.Clock()
 done = False
 
 my_map = Map()
-boss = Boss(win_width/2, -200, my_map)
+boss = Boss(win_width/2, -300, my_map)
 
 boss_phase = False
 add_phase = True
@@ -35,9 +35,22 @@ while not done:
     evt = pygame.event.poll()
     keys = pygame.key.get_pressed()
     if add_phase:
-        my_map.input(evt, keys)
+        list2 = my_map.input(evt, keys)
+        boss_phase = list2[0]
+        add_phase = list2[1]
+        if add_phase == False:
+            my_map.reset()
+            boss_phase = True
+            add_phase = False
     elif boss_phase:
-        boss.input(evt, keys)
+        list = boss.input(evt, keys)
+        boss_phase = list[0]
+        add_phase = list[1]
+        if boss_phase == False:
+            boss.reset()
+            boss_phase = False
+            add_phase = True
+
     if evt.type == pygame.QUIT:
         done = True
     elif evt.type == pygame.KEYDOWN:
