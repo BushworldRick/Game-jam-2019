@@ -30,6 +30,7 @@ BOSS = pygame.image.load("Sprites/PossibleBoss1.png")
 img_w = BOSS.get_width()
 img_h = BOSS.get_height()
 BOSS = pygame.transform.scale(BOSS, (img_w, img_h)).convert()
-BOSS.set_colorkey((0, 0, 0))
+BOSS.set_colorkey((255, 0, 255))
+BOSS.set_alpha(255)
 boss_directions = {"left": 1, "right": 3, "up": 0, "down": 2, "frameheight": 64, "framewidth": 64, "frames_wide": 8,
                      "x_offset": 15, "y_offset": 5}
