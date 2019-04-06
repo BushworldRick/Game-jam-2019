@@ -6,7 +6,7 @@ from Enemy import *
 from bullet import *
 from copy import deepcopy
 
-NUM_ENEMIES = 20
+NUM_ENEMIES = 30
 
 
 class Map:
@@ -16,9 +16,10 @@ class Map:
         self.Player = Player((800, 600), SHIP)
         self.mPreset_enemies = []
         num = len(TheEnd_dict)
+        print(num)
         for i in range(NUM_ENEMIES):
             spwn_x = randint(0, win_width)
-            chance = randint(0,1)
+            chance = randint(0,5)
             if num > 0:
                 print(num)
                 if chance == 0:
@@ -30,13 +31,15 @@ class Map:
                     num -= 1
             else:
                 self.mPreset_enemies.append(Enemy(spwn_x, -50))
+        print(num, "num before while loop")
         while num > 0:
             spwn_x = randint(0, win_width)
+            print(TheEnd_dict)
             key = choice(list(TheEnd_dict.keys()))
             letter = TheEnd_dict[key]
             self.mPreset_enemies.append(Enemy(spwn_x, spwn_x, str(letter)))
             del TheEnd_dict[key]
-            num -= 0
+            num -= 1
         self.mEnemies = [deepcopy(self.mPreset_enemies[0])]
         self.Enemy_delay = 0.5
         self.Enemy_index = 1
