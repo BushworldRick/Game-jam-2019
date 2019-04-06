@@ -31,7 +31,7 @@ class Boss:
 
     def update(self, dt):
         self.mBoss_timer -= dt
-        self.Map.Player.update(dt)
+        self.Map.Player.update(dt, self.Map.code_good)
 
         if self.print1:
             # print("it works")

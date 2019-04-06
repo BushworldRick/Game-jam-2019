@@ -66,7 +66,7 @@ class Map:
                 self.Enemy_index += 1
                 self.Enemy_delay = 0.5
 
-        self.Player.update(dt,self.code_good)
+        self.Player.update(dt, self.code_good)
 
         # print(len(self.mEnemies), "number of enemies")
         if len(self.mEnemies) > 0:
