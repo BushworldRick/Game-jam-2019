@@ -9,7 +9,9 @@ class Bullet:
         self.speed_x = 100
         self.rad = 3
 
+
     def update(self, dt):
+
         if self.dir == 2:
             self.pos[1] -= self.speed_y * dt
         elif self.dir == 1:

@@ -53,7 +53,7 @@ class Boss:
         self.mBullet_cooldown = 1
 
     def input(self, evt, keys):
-        self.Map.Player.input(evt,keys)
+        self.Map.Player.input(evt, keys)
 
         if self.position[1] < -300:
             self.position[1] = -299

@@ -6,7 +6,7 @@ from Enemy import *
 from bullet import *
 from copy import deepcopy
 
-NUM_ENEMIES = 5
+NUM_ENEMIES = 20
 
 class Map:
     def __init__(self):
