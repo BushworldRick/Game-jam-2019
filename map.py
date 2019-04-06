@@ -10,6 +10,8 @@ NUM_ENEMIES = 20
 
 class Map:
     def __init__(self):
+        self.win_width = win_width
+        self.win_height = win_height
         self.Player = Player((800,600), SHIP)
         self.mPreset_enemies = []
         for i in range(NUM_ENEMIES):
@@ -22,6 +24,8 @@ class Map:
         self.mDel_enemies = False
         self.mBoss_phase = False
         self.mAdd_phase = True
+        self.hp_bar = pygame.image.load("Sprites/hp_gradient.png")
+
 
     def update(self, dt):
 
@@ -65,3 +69,10 @@ class Map:
         if len(self.mEnemies) > 0:
             for e in self.mEnemies:
                 e.draw(win)
+
+        pcent = self.Player.health / self.Player.max_health
+        color = self.hp_bar.get_at((int((self.hp_bar.get_width() - 1) * pcent), 0))
+        width = 150 * pcent
+        outer_width = width + 3
+        pygame.draw.rect(win, (255, 255, 255), (618, 18, outer_width, 15), 2)
+        pygame.draw.rect(win, color, (620, 20, width, 12))

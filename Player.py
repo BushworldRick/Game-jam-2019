@@ -18,6 +18,8 @@ class Player:
         self.frame_column = 0
         self.timer = .3
         self.x = 0
+        self.max_health = 100
+        self.health = 100
 
         # stuff for the image
         self.img = img
