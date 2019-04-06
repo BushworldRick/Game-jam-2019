@@ -6,9 +6,13 @@ class Terminal:
     def __init__(self):
         self.image = pygame.image.load("Sprites/futuristicScreen.jpg")
         self.font = pygame.font.SysFont("Vixar ASCI", 48)
+        self.term_string = "Code: "
 
     def update(self, dt):
         pass
+
+    def input(self, evt, keys):
+        self.term_string += str(keys)
 
     def draw(self, win, string):
         win.blit(self.image, (0, 0, win_width, win_height))

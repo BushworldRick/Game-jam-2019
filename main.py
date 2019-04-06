@@ -49,7 +49,7 @@ while not done:
         if evt.key == pygame.K_ESCAPE:
             done = True
         if terminal_phase:
-            term_string += str(keys)
+            term.input(evt, keys)
         if evt.key == pygame.K_p and boss_phase is not True:
             terminal_phase = True
             add_phase = False
