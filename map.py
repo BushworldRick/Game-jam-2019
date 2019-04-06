@@ -38,11 +38,11 @@ class Map:
 
         self.Player.update(dt)
 
-        print(len(self.mEnemies), "number of enemies")
+        #print(len(self.mEnemies), "number of enemies")
         if len(self.mEnemies) > 0:
             for e in self.mEnemies:
                 e.update(dt)
-                print(e.mPos[1])
+                #print(e.mPos[1])
                 if e.mPos[1] > 810:
                     self.mEnemies.remove(e)
 
@@ -55,8 +55,8 @@ class Map:
 
     def input(self, evt, keys):
         self.Player.input(evt,keys)
-        print(len(self.mEnemies))
-        print(self.Enemy_index, "enemy index")
+        #print(len(self.mEnemies))
+        #print(self.Enemy_index, "enemy index")
         if len(self.mEnemies) == 0:
             self.mEnemies = [deepcopy(self.mPreset_enemies[0])]
             return True,False

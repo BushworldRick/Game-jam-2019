@@ -16,7 +16,7 @@ class Player:
         self.bullet_list = []   # bullet class objects
         self.frame_row = 6
         self.frame_column = 0
-        self.timer = .3
+        self.timer = .25
         self.x = 0
         self.max_health = 100
         self.health = 100
