@@ -69,9 +69,9 @@ class Map:
             for e in self.mEnemies:
                 e.draw(win)
 
-        pcent = self.Player.health / self.Player.max_health
-        color = self.hp_bar.get_at((int((self.hp_bar.get_width() - 1) * pcent), 0))
-        width = 150 * pcent
-        outer_width = width + 3
-        pygame.draw.rect(win, (255, 255, 255), (618, 18, outer_width, 15), 2)
-        pygame.draw.rect(win, color, (620, 20, width, 12))
+        # pcent = self.Player.health / self.Player.max_health
+        # color = self.hp_bar.get_at((int((self.hp_bar.get_width() - 1) * pcent), 0))
+        # width = 150 * pcent
+        # outer_width = width + 3
+        # pygame.draw.rect(win, (255, 255, 255), (618, 18, outer_width, 15), 2)
+        # pygame.draw.rect(win, color, (620, 20, width, 12))
