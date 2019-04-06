@@ -79,7 +79,7 @@ class Player:
 
         if keys[pygame.K_SPACE]:
             self.x += self.dt
-            print(self.code_good)
+            #print(self.code_good)
             if self.x >= self.timer:
                 self.bullet_list.append(Bullet(self.player_pos, self.code_good,1))
                 self.bullet_list.append(Bullet(self.player_pos, self.code_good,2))

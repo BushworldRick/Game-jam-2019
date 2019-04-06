@@ -43,8 +43,8 @@ class Enemy:
         return self.Spwn_bullets
 
     def attack(self):
-        x_rate = 25
-        y_rate = 150
+        x_rate = 50
+        y_rate = 175
 
         if self.mAttack_type == 0:
             bullet1 = [self.mPos[0] - 7, self.mPos[1], [0, y_rate*1.5]]

@@ -16,7 +16,8 @@ class Boss:
         self.mBoss_timer = 10
         self.mBoss_phase = True
         self.mAdd_phase = False
-        self.mBullet_cooldown = 1
+        self.mBullet_cooldown = 1.5
+        self.mBullet2_cooldown = 2
         self.enemy_box = pygame.Rect(self.position[0] - (self.mBoss_w / 2), self.position[1] - (self.mBoss_h / 2), self.mBoss_w, self.mBoss_h)
 
         # text box / timer stuff
@@ -56,14 +57,31 @@ class Boss:
             self.print2 = True
 
         self.mBullet_cooldown -= dt
-        if self.mBullet_cooldown < 0:
-            self.attack1(self.position[0] - 50, self.position[1])
-            self.attack1(self.position[0] + 50, self.position[1])
+        if self.position[1] >= -300:
+            if self.mBullet_cooldown < 0:
+                self.attack1(self.position[0] - 50, self.position[1])
+                self.attack1(self.position[0] + 50, self.position[1])
 
-        for group in self.mBullet_list:
-            for bullet in group:
-                bullet[1] += bullet[2][1] * dt
-                bullet[0] += bullet[2][0] * dt
+        self.mBullet2_cooldown -= dt
+        if self.position[1] >= -300:
+            if self.mBullet2_cooldown < 0:
+                self.attack2(self.position[0], self.position[1])
+
+        length = len(self.mBullet_list)-1
+        if length > 0:
+            while length >= 0:
+            #for group in self.mBullet_list:
+                bullets = self.mBullet_list[length]
+                for j in range(len(bullets)):
+                #for bullet in group:
+                    bullet = self.mBullet_list[length][j]
+                    bullet[1] += bullet[3] * dt
+                    bullet[0] += bullet[2] * dt
+                    if bullet[1] > win_height + 10:
+                        self.mBullet_list.remove(bullets)
+                        break
+                length -= 1
+
 
         for i in self.Map.Player.bullet_list:
             bul_rect = pygame.Rect(i.pos[0] - 3, i.pos[1] + 3, 6, 6)
@@ -75,27 +93,36 @@ class Boss:
     def attack1(self, spwn_x, spwn_y):
         x_rate = 50
         y_rate = 150
-        bullet1 = [spwn_x, spwn_y, [0, y_rate]]
-        bullet2 = [spwn_x, spwn_y, [x_rate, y_rate]]
-        bullet3 = [spwn_x, spwn_y, [x_rate*2, y_rate]]
-        bullet4 = [spwn_x, spwn_y, [-x_rate, y_rate]]
-        bullet5 = [spwn_x, spwn_y, [-x_rate*2, y_rate]]
+        bullet1 = [spwn_x, spwn_y, 0, y_rate]
+        bullet2 = [spwn_x, spwn_y, x_rate, y_rate]
+        bullet3 = [spwn_x, spwn_y, x_rate*2, y_rate]
+        bullet4 = [spwn_x, spwn_y, -x_rate, y_rate]
+        bullet5 = [spwn_x, spwn_y, -x_rate*2, y_rate]
         bullet_group = [bullet1, bullet2, bullet3, bullet4, bullet5]
         self.mBullet_list.append(bullet_group)
-        self.mBullet_cooldown = 1
+        self.mBullet_cooldown = 1.5
+
+    def attack2(self, spwn_x, spwn_y):
+        x_rate = 50
+        y_rate = 150
+        bullet1 = [spwn_x, spwn_y, 0, y_rate]
+        bullet2 = [spwn_x, spwn_y, x_rate*2, y_rate]
+        bullet3 = [spwn_x, spwn_y, -x_rate*2, y_rate]
+        self.mBullet_list.append([bullet1, bullet2, bullet3])
+        self.mBullet2_cooldown = 2
 
     def input(self, evt, keys):
         self.Map.Player.input(evt, keys)
 
-        if self.position[1] < -300:
-            self.position[1] = -299
-            return False, True
+        if self.mBoss_timer < 0:
+            if len(self.mBullet_list) <= 0:
+                return False, True
 
         return self.mBoss_phase, self.mAdd_phase
 
     def reset(self):
         self.mBullet_list = []
-        self.position[1] = -300
+        self.position[1] = -299
         self.mAdd_phase = False
         self.mBoss_phase = True
         self.mBoss_timer = 10
@@ -105,8 +132,12 @@ class Boss:
 
         self.Map.Player.draw(win)
         for bullet_group in self.mBullet_list:
-            for bullet in bullet_group:
-                pygame.draw.circle(win, (255, 0, 0), (int(bullet[0]), int(bullet[1])), 5)
+            if len(bullet_group) > 3:
+                for bullet in bullet_group:
+                    win.blit(BULLET, (int(bullet[0]-5), int(bullet[1]-5)))
+            else:
+                for bullet in bullet_group:
+                    win.blit(ORB, (int(bullet[0]-10), int(bullet[1]-10)))
         win.blit(self.mBoss_image, (self.position[0] - (self.mBoss_w/2), self.position[1] - (self.mBoss_h/2)))
 
         pygame.draw.rect(win, (255, 255, 0), (15, 15, 200, 10), 1)
