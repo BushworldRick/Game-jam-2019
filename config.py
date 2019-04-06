@@ -13,8 +13,7 @@ img_h = SHIP.get_height()
 SHIP = pygame.transform.scale(SHIP, (img_w, img_h)).convert()
 SHIP = pygame.transform.rotate(SHIP, math.pi / 2)
 SHIP.set_colorkey((0, 0, 0))
-ship_directions = {"left": 1, "right": 3, "up": 0, "down": 2, "frameheight": 64, "framewidth": 64, "frames_wide": 8,
-                     "x_offset": 15, "y_offset": 5}
+ship_directions = {"left": 1, "right": 3, "up": 0, "down": 2, "frameheight": 100, "framewidth": 100, "frames_wide": 8}
 
 # Enemy Sprite
 ENEMY = pygame.image.load("Sprites/enemy_sprites.PNG")
