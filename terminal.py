@@ -4,7 +4,7 @@ from config import *
 
 class Terminal:
     def __init__(self):
-        self.image = pygame.image.load("Sprites/futuristicScreen.jpg")
+        self.image = TERM
         self.font = pygame.font.SysFont("Vixar ASCI", 48)
         self.term_string = "Code: "
 
