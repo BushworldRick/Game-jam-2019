@@ -2,10 +2,8 @@ import pygame
 
 
 class Bullet:
-    def __init__(self, position, x_speed, y_speed, dir=1):
+    def __init__(self, position, dir=1):
         self.pos = position
-        self.x_spd = x_speed
-        self.y_spd = y_speed
         self.dir = dir
         self.rad = 3
 
@@ -26,9 +24,6 @@ class Bullet:
         elif self.dir == -3:
             self.pos[0] -= self.rad * dt
             self.pos[1] += self.rad * dt
-
-    def input(self, evt, keys):
-        pass
 
     def draw(self, win):
         pygame.draw.circle(win, (0, 255, 0), (int(self.pos[0]), int(self.pos[1])), self.rad)

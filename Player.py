@@ -1,5 +1,6 @@
 import pygame
 from config import *
+from bullet import *
 
 class Player:
     def __init__(self,screen_dems, img = None):
@@ -34,7 +35,7 @@ class Player:
         if self.pos[1] > self.screenheight - (self.player_hitbox *  2):
             self.pos[1] = self.screenheight - (self.player_hitbox * 2)
 
-    def input(self, keys):
+    def input(self, evt, keys):
         # Moving player_ship
         if keys[pygame.K_a] or keys[pygame.K_LEFT]:
             self.pos[0] -= self.speed * self.dt
@@ -53,6 +54,11 @@ class Player:
             self.pos[1] -= self.speed * self.dt
         if keys[pygame.K_s] or keys[pygame.K_DOWN]:
             self.pos[1] += self.speed * self.dt
+        if evt.type == pygame.KEYDOWN:
+            if evt.key == pygame.K_SPACE:
+                self.bullet_list.append(Bullet(self.Player.pos, 1))
+                self.bullet_list.append(Bullet(self.Player.pos, 2))
+                self.bullet_list.append(Bullet(self.Player.pos, 3))
 
     def draw(self,surf):
         # temorary player
@@ -62,3 +68,6 @@ class Player:
         self.img_w, self.img_h)
 
         surf.blit(self.img, (int(self.pos[0] - (self.img_w/2 + 15)),int(self.pos[1] - (self.img_h/2 + 15))), rect)
+
+        for i in self.bullet_list:
+            i.draw(win)

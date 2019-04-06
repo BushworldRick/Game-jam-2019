@@ -20,7 +20,7 @@ class Boss:
             self.position[1] += self.speed * dt
 
     def attack1(self):
-
+        pass
 
     def input(self, evt, keys):
         self.Map.Player.input(keys)

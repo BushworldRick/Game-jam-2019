@@ -3,6 +3,7 @@ from Player import *
 from config import *
 from random import randint
 from Enemy import *
+from bullet import *
 
 NUM_ENEMIES = 20
 
@@ -15,6 +16,7 @@ class Map:
             self.mEnemies.append(Enemy(spwn_x, -50))
         self.Enemy_delay = 0.5
         self.Enemy_index = 1
+        self.bullet_list = []
 
 
     def update(self, dt):
@@ -32,6 +34,7 @@ class Map:
 
     def input(self, evt, keys):
         self.Player.input(keys)
+
 
     def draw(self, win):
 
