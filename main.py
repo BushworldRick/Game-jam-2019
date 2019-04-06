@@ -22,8 +22,6 @@ for i in range(max_stars):
     star = [x, y, rad, spd]
     stars.append(star)
 
-term_string = "Code: "
-
 while not done:
     # Update
     dt = clock.tick() / 1000.0
@@ -31,6 +29,8 @@ while not done:
         my_map.update(dt)
     elif boss_phase:
         boss.update(dt)
+    elif terminal_phase:
+        term.update(dt)
     for star in stars:
         star[1] += star[3] * dt
         if star[1] > star[2] + 600:
@@ -66,7 +66,7 @@ while not done:
     elif boss_phase:
         boss.draw(win)
     elif terminal_phase:
-        term.draw(win, term_string)
+        term.draw(win)
     pygame.display.flip()
 
 pygame.quit()

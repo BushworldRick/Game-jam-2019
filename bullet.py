@@ -5,9 +5,9 @@ class Bullet:
     def __init__(self, position, dir=1):
         self.pos = position.copy()
         self.dir = dir
-        self.speed_y = 300
-        self.speed_x = 100
-        self.rad = 3
+        self.speed_y = 300 * 2
+        self.speed_x = 100 * 2
+        self.rad = 6
 
 
     def update(self, dt):
