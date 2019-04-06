@@ -53,15 +53,9 @@ class Map:
         self.mDel_enemies = False
 
     def input(self, evt, keys):
-<<<<<<< HEAD
         self.Player.input(evt,keys)
         #print(len(self.mEnemies))
         #print(self.Enemy_index, "enemy index")
-=======
-        self.Player.input(evt, keys)
-        print(len(self.mEnemies))
-        print(self.Enemy_index, "enemy index")
->>>>>>> f094e4a868c91fef0cf1467ac38a5695dbab687b
         if len(self.mEnemies) == 0:
             self.mEnemies = [deepcopy(self.mPreset_enemies[0])]
             return True, False
