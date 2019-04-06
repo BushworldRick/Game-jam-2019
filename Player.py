@@ -13,6 +13,8 @@ class Player:
         self.speed = 150
         self.player_hitbox = 15
         self.bullets = []   # bullet class objects
+        self.frame_row = 6
+        self.frame_column = 0
 
         # stuff for the image
         self.img = img
@@ -46,3 +48,8 @@ class Player:
     def draw(self,surf):
         # temorary player
         pygame.draw.circle(surf, (0,255,0), (int(self.pos[0]), int(self.pos[1])), 15)
+
+        rect = (ship_directions["framewidth"] * self.frame_column, ship_directions["frameheight"] * self.frame_row,
+        ship_directions["framewidth"], ship_directions["frameheight"])
+
+        surf.blit(self.img, (int(self.pos[0]),int(self.pos[1])), rect)
