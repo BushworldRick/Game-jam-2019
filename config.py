@@ -16,11 +16,10 @@ SHIP.set_colorkey((0, 0, 0))
 ship_directions = {"frameheight": 100, "framewidth": 65}
 
 # Enemy Sprite
-ENEMY = pygame.image.load("Sprites/enemy_sprites.PNG")
+ENEMY = pygame.image.load("Sprites/shipsheetparts.png")
 img_w = ENEMY.get_width()
 img_h = ENEMY.get_height()
 ENEMY = pygame.transform.scale(ENEMY, (img_w, img_h)).convert()
-ENEMY = pygame.transform.rotate(ENEMY, math.pi)
 ENEMY.set_colorkey((0, 0, 0))
 enemy_directions = {"left": 1, "right": 3, "up": 0, "down": 2, "frameheight": 64, "framewidth": 64, "frames_wide": 8,
                     "x_offset": 15, "y_offset": 5}
