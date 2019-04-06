@@ -19,8 +19,7 @@ class Player:
         self.img_w = self.img.get_width
         self.img_h = self.img.get_height
 
-
-    def update(self,dt):
+    def update(self, dt):
         self.dt = dt
 
         # keep on screen code
@@ -33,8 +32,7 @@ class Player:
         if self.pos[1] > self.screenheight:
             self.pos[1] = self.screenheight - self.player_hitbox
 
-
-    def input(self,keys):
+    def input(self, keys):
         # Moving player_ship
         if keys[pygame.K_a] or keys[pygame.K_LEFT]:
             self.pos[0] -= self.speed * self.dt
