@@ -30,7 +30,7 @@ class Enemy:
                 self.mFrame_delay = 0.1
 
     def explode(self):
-        #self.mSource_rect = pygame.Rect()
+        # self.mSource_rect = pygame.Rect()
         self.Exploding = True
 
     def draw(self, win):
@@ -39,4 +39,4 @@ class Enemy:
         else:
             print(self.pars_y)
             win.blit(SHIP, (int(self.mPos[0] - (85/2)), int(self.mPos[1]) - (self.Exploding_frameh/2)), (310, self.pars_y, 85, self.Exploding_frameh))
-        #pygame.draw.circle(win, (255, 0, 0), (int(self.mPos[0]), int(self.mPos[1]) - 5), self.mEnemy_rad, 1)
+        # pygame.draw.circle(win, (255, 0, 0), (int(self.mPos[0]), int(self.mPos[1]) - 5), self.mEnemy_rad, 1)
