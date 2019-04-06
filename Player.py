@@ -21,6 +21,7 @@ class Player:
         self.x = 0
         self.max_health = 100
         self.health = 100
+        self.attack = 1
 
         # stuff for the image
         self.img = img
@@ -80,7 +81,7 @@ class Player:
                 self.bullet_list.append(Bullet(self.player_pos, 3))
                 self.x = 0
 
-    def draw(self,surf):
+    def draw(self, surf):
         # temporary player
         pygame.draw.circle(surf, (0, 255, 0), (int(self.player_pos[0]), int(self.player_pos[1])), self.player_hitbox, 1)
 

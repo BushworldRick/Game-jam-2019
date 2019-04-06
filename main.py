@@ -14,6 +14,7 @@ term = Terminal()
 boss_phase = False
 add_phase = True
 terminal_phase = False
+code_good = False
 
 max_stars = 200
 stars = []
@@ -35,11 +36,13 @@ while not done:
     elif boss_phase:
         boss.update(dt)
     elif terminal_phase:
-        term.update(dt)
+        code_good = term.update(dt)
     for star in stars:
         star[1] += star[3] * dt
         if star[1] > star[2] + 600:
             star[1] = -star[2]
+    if code_good:
+        my_map.Player.attack = 50
 
     # Input
     evt = pygame.event.poll()
