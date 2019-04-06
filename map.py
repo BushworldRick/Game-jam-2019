@@ -56,7 +56,7 @@ class Map:
                 b = e_y - b_y
                 distance = (a * a + b * b) ** 0.5
                 if distance < bullet.rad + enemy.mEnemy_rad:
-                    self.mEnemies.remove(enemy)
+                    enemy.explode()
 
     def reset(self):
         self.Enemy_index = 1
