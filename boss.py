@@ -1,19 +1,22 @@
 import pygame
-import random
 from config import *
+from Player import *
 
 
 class Boss:
-    def __init__(self, pos):
-        self.mPos = [pos[0], pos[1]]
-        self.mSin_width = random.randint(30, 75)
-        self.mid_x = pos[0]
-        self.Speed = 0.1
-        self.mRate = 100
+    def __init__(self, x, y, map):
+        self.position = [x, y]
+        self.Map = map
 
     def update(self, dt):
-        self.mPos[1] += self.mRate * dt
-        self.mPos[0] = math.sin(self.mPos[1] * .05) * self.mSin_width + self.mid_x
+        self.Map.Player.update(dt)
+
+    def input(self, evt, keys):
+        self.Map.Player.input(keys)
 
     def draw(self, win):
-        pygame.draw.circle(win, (255, 0, 0), (int(self.mPos[0]), int(self.mPos[1])), 5)
+        self.Map.Player.draw(win)
+
+
+
+
