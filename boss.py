@@ -21,6 +21,22 @@ class Boss:
         self.mBullet2_cooldown = 2
         self.enemy_box = pygame.Rect(self.position[0] - (self.mBoss_w / 2), self.position[1] - (self.mBoss_h / 2), self.mBoss_w, self.mBoss_h)
 
+        self.pars_y = 323
+        self.explostionh = 105
+        self.frame_delay = 0.1
+        self.mExplosions = [[self.position[0] + 25, self.position[1] - 25, random.randint(1, 4) / 10, self.pars_y],
+                            [self.position[0] + 75, self.position[1] + 25, random.randint(1, 4) / 10, self.pars_y],
+                            [self.position[0] + 40, self.position[1] - 30, random.randint(1, 4) / 10, self.pars_y],
+                            [self.position[0] + 10, self.position[1] + 40, random.randint(1, 4) / 10, self.pars_y],
+                            [self.position[0] - 45, self.position[1] + 80, random.randint(1, 4) / 10, self.pars_y],
+                            [self.position[0] - 70, self.position[1] - 50, random.randint(1, 4) / 10, self.pars_y],
+                            [self.position[0] - 50, self.position[1] - 50, random.randint(1, 4) / 10, self.pars_y],
+                            [self.position[0] - 70, self.position[1] - 60, random.randint(1, 4) / 10, self.pars_y],
+                            [self.position[0] - 20, self.position[1] - 70, random.randint(1, 4) / 10, self.pars_y],
+                            [self.position[0] - 35, self.position[1] + 50, random.randint(1, 4) / 10, self.pars_y],
+                            [self.position[0] - 40, self.position[1] + 80, random.randint(1, 4) / 10, self.pars_y],
+                            [self.position[0] - 10, self.position[1] + 90, random.randint(1, 4) / 10, self.pars_y],]
+
         # text box / timer stuff
         self.print1 = False
         self.font = pygame.font.SysFont("Bahnschrift", 16)
@@ -68,6 +84,13 @@ class Boss:
             if self.mBullet2_cooldown < 0:
                 self.attack2(self.position[0], self.position[1])
 
+        if self.mHealth <= 0:
+            for explosion in self.mExplosions:
+                explosion[2] -= dt
+                if explosion[2] < 0:
+                    explosion[3] -= self.explostionh
+                    explosion[2] = 0.1
+
         length = len(self.mBullet_list)-1
         if length >= 0:
             while length >= 0:
@@ -105,6 +128,25 @@ class Boss:
             if collide:
                 self.mHealth -= self.Map.Player.attack
                 self.Map.Player.bullet_list.remove(i)
+
+    def explosions(self, win):
+        self.mExplosions[0][1] = self.position[1]-25
+        self.mExplosions[1][1] = self.position[1]+25
+        self.mExplosions[2][1] = self.position[1]-30
+        self.mExplosions[3][1] = self.position[1]+40
+        self.mExplosions[4][1] = self.position[1]+80
+        self.mExplosions[5][1] = self.position[1]-50
+        self.mExplosions[6][1] = self.position[1] - 50
+        self.mExplosions[7][1] = self.position[1] - 60
+        self.mExplosions[8][1] = self.position[1] - 70
+        self.mExplosions[9][1] = self.position[1] + 50
+        self.mExplosions[10][1] = self.position[1] + 80
+        self.mExplosions[11][1] = self.position[1] + 90
+
+
+        for explosion in self.mExplosions:
+            print(explosion[0], explosion[1], "x, y for explosion")
+            win.blit(SHIP, (explosion[0], explosion[1]), (310, explosion[3], 75, self.explostionh))
 
     def attack1(self, spwn_x, spwn_y):
         x_rate = random.randint(40, 65)
@@ -146,6 +188,7 @@ class Boss:
 
     def draw(self, win):
 
+
         self.Map.Player.draw(win)
         for bullet_group in self.mBullet_list:
             if len(bullet_group) > 3:
@@ -171,3 +214,6 @@ class Boss:
             self.text_box.blit(self.font.render(self.print2_text, True, (0, 0, 0)), (15, 15))
 
         pygame.draw.rect(win, (255, 255, 255), (self.position[0] - (self.mBoss_w / 2), self.position[1] - (self.mBoss_h / 2), self.mBoss_w, self.mBoss_h), 2)
+
+        if self.mHealth <= 0:
+            self.explosions(win)

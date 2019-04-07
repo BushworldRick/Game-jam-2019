@@ -52,7 +52,9 @@ while not done:
         my_map.Player.attack = 50
     if boss.mHealth <= 0:
         boss.mHealth = 0
-        game_over = True
+        for explostion in boss.mExplosions:
+            if explostion[3] < -200:
+                game_over = True
     elif my_map.Player.health <= 0:
         my_map.Player.exploding = True
         my_map.Player.health = 0
