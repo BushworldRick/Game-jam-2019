@@ -20,6 +20,7 @@ term = Terminal()
 end_screen = pygame.image.load("Sprites/game_jam_end.png")
 start_img = pygame.image.load("Sprites/game_jam_cover.png")
 start_end_font = pygame.font.Font("Sprites/Fonts/venus rising rg.ttf", 24)
+add_font = pygame.font.Font("Sprites/Fonts/venus rising rg.ttf", 12)
 
 
 max_stars = 200
@@ -111,7 +112,10 @@ while not done:
 
     elif start_screen:
         win.blit(start_img, (-100, -150, win_width, win_height))
-        win.blit(start_end_font.render("Press Enter to Begin!", True, (39, 135, 104)), (175, 500))
+        win.blit(start_end_font.render("Press Enter to Begin!", True, (39, 135, 104)), (175, 450))
+        win.blit(add_font.render("Arrow Keys to move", True, (39, 135, 104)), (30, 575))
+        win.blit(add_font.render("Space to fire weapon", True, (39, 135, 104)), (280, 575))
+        win.blit(add_font.render("P to open terminal", True, (39, 135, 104)), (570, 575))
 
     elif not game_over:
         for star in stars:
