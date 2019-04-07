@@ -7,12 +7,12 @@ import random
 clock = pygame.time.Clock()
 done = False
 
-start_screen = False
+start_screen = True
 boss_phase = False
 add_phase = False
 terminal_phase = False
 code_good = False
-game_over = True
+game_over = False
 
 my_map = Map(code_good)
 boss = Boss(win_width/2, -200, my_map)
