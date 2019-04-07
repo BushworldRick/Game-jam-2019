@@ -102,6 +102,7 @@ class Boss:
                     explosion[3] -= self.explostionh
                     explosion[2] = explosion[4]
 
+
         length = len(self.mBullet_list)-1
         if length >= 0:
             while length >= 0:
