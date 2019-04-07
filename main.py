@@ -85,9 +85,9 @@ while not done:
                 print("it quit")
                 terminal_phase = False
                 add_phase = True
-        if game_over and evt.key == pygame.K_RETURN:
+        if game_over and (evt.key == pygame.K_RETURN or evt.key == pygame.K_KP_ENTER):
             done = True
-        if start_screen and evt.key == pygame.K_RETURN:
+        if start_screen and (evt.key == pygame.K_RETURN or evt.key == pygame.K_KP_ENTER):
             start_screen = False
             add_phase = True
 
