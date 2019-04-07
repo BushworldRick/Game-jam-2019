@@ -20,6 +20,7 @@ term = Terminal()
 end_screen = pygame.image.load("Sprites/game_jam_end.png")
 start_img = pygame.image.load("Sprites/game_jam_cover.png")
 start_end_font = pygame.font.Font("Sprites/Fonts/venus rising rg.ttf", 24)
+add_font = pygame.font.Font("Sprites/Fonts/venus rising rg.ttf", 12)
 
 
 max_stars = 200
