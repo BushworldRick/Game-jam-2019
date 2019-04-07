@@ -7,7 +7,7 @@ from bullet import *
 from copy import deepcopy
 import boss
 
-NUM_ENEMIES = 50
+NUM_ENEMIES = 25
 
 class Map:
     def __init__(self,code_good):
@@ -34,9 +34,9 @@ class Map:
         print(num, "num before while loop")
         while num > 0:
             spwn_x = randint(0, win_width)
-            print(TheEnd_dict)
             key = choice(list(TheEnd_dict.keys()))
             letter = TheEnd_dict[key]
+            print(key, letter, "key, letter")
             self.mPreset_enemies.append(Enemy(spwn_x, -50, str(letter)))
             del TheEnd_dict[key]
             num -= 1
