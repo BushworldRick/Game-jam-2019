@@ -7,18 +7,19 @@ import random
 clock = pygame.time.Clock()
 done = False
 
-start_screen = True
+start_screen = False
 boss_phase = False
 add_phase = False
 terminal_phase = False
 code_good = False
-game_over = False
+game_over = True
 
 my_map = Map(code_good)
 boss = Boss(win_width/2, -200, my_map)
 term = Terminal()
 end_screen = pygame.image.load("Sprites/game_jam_end.png")
 start_img = pygame.image.load("Sprites/game_jam_cover.png")
+start_end_font = pygame.font.Font("Sprites/Fonts/venus rising rg.ttf", 24)
 
 
 max_stars = 200
@@ -94,9 +95,11 @@ while not done:
     win.fill((0, 0, 0))
     if game_over:
         win.blit(end_screen, (-75, -100, win_width, win_height))
+        win.blit(start_end_font.render("Press Enter to Close.", True, (39, 135, 104)), (175, 500))
 
     elif start_screen:
-        win.blit(start_img, (-100, -100, win_width, win_height))
+        win.blit(start_img, (-100, -150, win_width, win_height))
+        win.blit(start_end_font.render("Press Enter to Begin!", True, (39, 135, 104)), (175, 500))
 
     elif not game_over:
         for star in stars:
