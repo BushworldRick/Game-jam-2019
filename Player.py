@@ -25,6 +25,10 @@ class Player:
         self.max_health = 100
         self.health = 100
         self.attack = 1
+        self.pars_y = 630
+        self.explosion_frameh = 105
+        self.exploding = False
+        self.frame_delay = 0.1
 
         # stuff for the image
         self.img = img
@@ -35,6 +39,11 @@ class Player:
         self.dt = dt
         self.code_good = code
         #print(str(self.code_good) + " player class")
+        if self.exploding:
+            self.frame_delay -= dt
+            if self.frame_delay < 0:
+                self.frame_delay = 0.1
+                self.pars_y -= self.explosion_frameh
 
         # Bullet Update
         for b in self.bullet_list:
@@ -57,42 +66,48 @@ class Player:
 
     def input(self, evt, keys):
         # Moving player_ship
-        if keys[pygame.K_a] or keys[pygame.K_LEFT]:
-            self.player_pos[0] -= self.speed * self.dt
-            self.frame_row = 4
-            self.frame_column = 1
+        if not self.exploding:
+            if keys[pygame.K_a] or keys[pygame.K_LEFT]:
+                self.player_pos[0] -= self.speed * self.dt
+                self.frame_row = 4
+                self.frame_column = 1
 
-        elif keys[pygame.K_d] or keys[pygame.K_RIGHT]:
-            self.player_pos[0] += self.speed * self.dt
-            self.frame_row = 6
-            self.frame_column = 1
-        else:
-            self.frame_row = 6
-            self.frame_column = 0
+            elif keys[pygame.K_d] or keys[pygame.K_RIGHT]:
+                self.player_pos[0] += self.speed * self.dt
+                self.frame_row = 6
+                self.frame_column = 1
+            else:
+                self.frame_row = 6
+                self.frame_column = 0
 
-        if keys[pygame.K_w] or keys[pygame.K_UP]:
-            self.player_pos[1] -= self.speed * self.dt
-        if keys[pygame.K_s] or keys[pygame.K_DOWN]:
-            self.player_pos[1] += self.speed * self.dt
+            if keys[pygame.K_w] or keys[pygame.K_UP]:
+                self.player_pos[1] -= self.speed * self.dt
+            if keys[pygame.K_s] or keys[pygame.K_DOWN]:
+                self.player_pos[1] += self.speed * self.dt
 
-        # make bullet list
+            # make bullet list
 
-        if keys[pygame.K_SPACE]:
-            self.x += self.dt
-            #print(self.code_good)
-            if self.x >= self.timer:
-                self.bullet_list.append(Bullet(self.player_pos, self.code_good,1))
-                self.bullet_list.append(Bullet(self.player_pos, self.code_good,2))
-                self.bullet_list.append(Bullet(self.player_pos, self.code_good,3))
-                self.x = 0
+            if keys[pygame.K_SPACE]:
+                self.x += self.dt
+                #print(self.code_good)
+                if self.x >= self.timer:
+                    self.bullet_list.append(Bullet(self.player_pos, self.code_good,1))
+                    self.bullet_list.append(Bullet(self.player_pos, self.code_good,2))
+                    self.bullet_list.append(Bullet(self.player_pos, self.code_good,3))
+                    self.x = 0
 
     def draw(self, surf):
         # temporary player
-        pygame.draw.circle(surf, (0, 255, 0), (int(self.player_pos[0]), int(self.player_pos[1])), self.player_hitbox, 1)
+        #pygame.draw.circle(surf, (0, 255, 0), (int(self.player_pos[0]), int(self.player_pos[1])), self.player_hitbox, 1)
 
         rect = (self.img_w * self.frame_column, self.img_h * self.frame_row, self.img_w, self.img_h)
 
         for i in self.bullet_list:
             i.draw(win)
 
-        surf.blit(self.img, (int(self.player_pos[0] - (self.img_w/2 + 15)), int(self.player_pos[1] - (self.img_h/2 + 15))), rect)
+        if not self.exploding:
+            surf.blit(self.img, (int(self.player_pos[0] - (self.img_w/2 + 15)), int(self.player_pos[1] - (self.img_h/2 + 15))), rect)
+        if self.exploding:
+            print("explosion animation for player")
+            surf.blit(self.img, (int(self.player_pos[0] - (self.img_w/2)), int(self.player_pos[1] - (self.img_h/2))),
+                      (310, self.pars_y, 85, self.explosion_frameh))

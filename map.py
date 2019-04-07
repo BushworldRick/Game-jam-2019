@@ -93,7 +93,7 @@ class Map:
                 c = (x**2 + y**2) ** (1/2)
                 if c <= 5 + self.Player.player_hitbox:
                     group.remove(bullet)
-                    self.Player.health -= 5
+                    self.Player.health -= 25
                     
 
         for enemy in self.mEnemies:

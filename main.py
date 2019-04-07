@@ -54,11 +54,17 @@ while not done:
         boss.mHealth = 0
         game_over = True
     elif my_map.Player.health <= 0:
-        my_map.Player.health = 100
-        boss.reset()
-        my_map.reset()
-        add_phase = True
-        boss_phase = False
+        my_map.Player.exploding = True
+        if my_map.Player.pars_y <= 8:
+            my_map.Player.pars_y = 630
+            boss.reset()
+            my_map.reset()
+            my_map.Player.health = 100
+            my_map.Player.exploding = False
+            boss_phase = False
+            add_phase = True
+
+
 
     # Input
     evt = pygame.event.poll()
@@ -119,7 +125,8 @@ while not done:
             pygame.draw.circle(win, (rgb, rgb, rgb), (int(x), int(y)), star[2])
 
         pcent = my_map.Player.health / my_map.Player.max_health
-        color = my_map.hp_bar.get_at((int((my_map.hp_bar.get_width() - 1) * pcent), 0))
+        if my_map.Player.health > 0:
+            color = my_map.hp_bar.get_at((int((my_map.hp_bar.get_width() - 1) * pcent), 0))
         width = 150 * pcent
         outer_width = 153
         pygame.draw.rect(win, (255, 255, 255), (618, 18, outer_width, 15), 2)
