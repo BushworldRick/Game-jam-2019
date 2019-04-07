@@ -79,7 +79,6 @@ class Map:
                 if spwn_bullets:
                     self.mEnemy_bullets.append(e.attack())
                     self.mEnemy_bullet_timer = 1.5
-                # print(e.mPos[1])
                 if e.mPos[1] > 810:
                     self.mEnemies.remove(e)
 
@@ -114,16 +113,6 @@ class Map:
                     if enemy.pars_y == 323:
                         self.Player.bullet_list.remove(bullet)
                     break
-        #tracking enemy bullets
-        """for b in range(len(self.mEnemy_bullets)):
-            print(self.mEnemy_bullets[b][0])
-            x = self.mEnemy_bullets[b][0] - self.Player.player_pos[0]
-            y = self.mEnemy_bullets[b][1] - self.Player.player_pos[1]
-            c = (x**2 + y**2) ** (1/2)
-            if c <= 5 + self.Player.player_hitbox:
-                self.mEnemy_bullets.remove(b)
-                self.Player.health -= 5"""
-
 
     def reset(self):
         self.Enemy_index = 1
@@ -131,6 +120,8 @@ class Map:
         self.mAdd_phase = True
         self.Enemy_delay = 0.5
         self.mDel_enemies = False
+        self.mEnemies = [deepcopy(self.mPreset_enemies[0])]
+        self.mEnemy_bullets = []
 
     def input(self, evt, keys):
         self.Player.input(evt,keys)
@@ -148,7 +139,6 @@ class Map:
         for bullet_group in self.mEnemy_bullets:
             for bullet in bullet_group:
                 win.blit(BULLET, (int(bullet[0]), int(bullet[1])))
-                #pygame.draw.circle(win, (255, 0, 0), (int(bullet[0]), int(bullet[1])), 5)
 
         if len(self.mEnemies) > 0:
             for e in self.mEnemies:

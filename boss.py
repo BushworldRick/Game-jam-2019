@@ -107,8 +107,8 @@ class Boss:
                 self.Map.Player.bullet_list.remove(i)
 
     def attack1(self, spwn_x, spwn_y):
-        x_rate = random.randint(40, 60)
-        y_rate = random.randint(140, 160)
+        x_rate = random.randint(40, 65)
+        y_rate = random.randint(175, 200)
         bullet1 = [spwn_x, spwn_y, 0, y_rate, "attack1"]
         bullet2 = [spwn_x, spwn_y, x_rate, y_rate, "attack1"]
         bullet3 = [spwn_x, spwn_y, x_rate*2, y_rate, "attack1"]
@@ -120,7 +120,7 @@ class Boss:
 
     def attack2(self, spwn_x, spwn_y):
         x_rate = random.randint(40, 60)
-        y_rate = random.randint(140, 160)
+        y_rate = random.randint(140, 170)
         bullet1 = [spwn_x, spwn_y, 0, y_rate, "attack2"]
         bullet2 = [spwn_x, spwn_y, x_rate*2, y_rate, "attack2"]
         bullet3 = [spwn_x, spwn_y, -x_rate*2, y_rate, "attack2"]

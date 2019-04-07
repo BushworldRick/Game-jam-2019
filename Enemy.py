@@ -43,8 +43,8 @@ class Enemy:
         return self.Spwn_bullets
 
     def attack(self):
-        x_rate = 50
-        y_rate = 175
+        x_rate = 75
+        y_rate = 200
 
         if self.mAttack_type == 0:
             bullet1 = [self.mPos[0] - 7, self.mPos[1], [0, y_rate*1.5]]
@@ -68,7 +68,7 @@ class Enemy:
             win.blit(ENEMY, (int(self.mPos[0] - (35/2)), int(self.mPos[1]) - (40/2)), (5, 10, 35, 40))
         else:
             if self.mLetter != None:
-                txt = font.render(str(self.mLetter), True, (255, 255, 255))
+                txt = font.render(str(self.mLetter), True, (0, 255, 0))
                 txt_w = txt.get_width()
                 txt_h = txt.get_height()
                 win.blit(txt, (int(self.mPos[0] - (txt_w/2)), int(self.mPos[1]) - (txt_h/2)))

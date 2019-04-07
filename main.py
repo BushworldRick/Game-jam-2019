@@ -53,6 +53,12 @@ while not done:
     if boss.mHealth <= 0:
         boss.mHealth = 0
         game_over = True
+    elif my_map.Player.health <= 0:
+        my_map.Player.health = 100
+        boss.reset()
+        my_map.reset()
+        add_phase = True
+        boss_phase = False
 
     # Input
     evt = pygame.event.poll()
@@ -90,6 +96,7 @@ while not done:
         if start_screen and (evt.key == pygame.K_RETURN or evt.key == pygame.K_KP_ENTER):
             start_screen = False
             add_phase = True
+
 
     # Drawing
     win.fill((0, 0, 0))
