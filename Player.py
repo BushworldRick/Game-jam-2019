@@ -29,6 +29,7 @@ class Player:
         self.explosion_frameh = 105
         self.exploding = False
         self.frame_delay = 0.1
+        self.distance = 400
 
         # stuff for the image
         self.img = img
@@ -55,7 +56,7 @@ class Player:
 
             if b.pos[1] < 0:
                 self.bullet_list.remove(b)
-            if distance >= 400:
+            elif distance >= self.distance:
                 self.bullet_list.remove(b)
         print(self.player_pos)
         if self.player_pos[1] < 440:
