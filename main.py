@@ -113,9 +113,9 @@ while not done:
     elif start_screen:
         win.blit(start_img, (-100, -150, win_width, win_height))
         win.blit(start_end_font.render("Press Enter to Begin!", True, (39, 135, 104)), (175, 450))
-        win.blit(add_font.render("Arrow Keys to move", True, (39, 135, 104)), (30, 575))
-        win.blit(add_font.render("Space to fire weapon", True, (39, 135, 104)), (280, 575))
-        win.blit(add_font.render("P to open terminal", True, (39, 135, 104)), (570, 575))
+        win.blit(add_font.render("Arrow Keys or WSAD to move", True, (39, 135, 104)), (20, 575))
+        win.blit(add_font.render("Space to fire weapon", True, (39, 135, 104)), (350, 575))
+        win.blit(add_font.render("P to open terminal", True, (39, 135, 104)), (600, 575))
 
     elif not game_over:
         for star in stars:
