@@ -23,19 +23,30 @@ class Boss:
 
         self.pars_y = 323
         self.explostionh = 105
-        self.frame_delay = 0.1
-        self.mExplosions = [[self.position[0] + 25, self.position[1] - 25, random.randint(1, 4) / 10, self.pars_y],
-                            [self.position[0] + 75, self.position[1] + 25, random.randint(1, 4) / 10, self.pars_y],
-                            [self.position[0] + 40, self.position[1] - 30, random.randint(1, 4) / 10, self.pars_y],
-                            [self.position[0] + 10, self.position[1] + 40, random.randint(1, 4) / 10, self.pars_y],
-                            [self.position[0] - 45, self.position[1] + 80, random.randint(1, 4) / 10, self.pars_y],
-                            [self.position[0] - 70, self.position[1] - 50, random.randint(1, 4) / 10, self.pars_y],
-                            [self.position[0] - 50, self.position[1] - 50, random.randint(1, 4) / 10, self.pars_y],
-                            [self.position[0] - 70, self.position[1] - 60, random.randint(1, 4) / 10, self.pars_y],
-                            [self.position[0] - 20, self.position[1] - 70, random.randint(1, 4) / 10, self.pars_y],
-                            [self.position[0] - 35, self.position[1] + 50, random.randint(1, 4) / 10, self.pars_y],
-                            [self.position[0] - 40, self.position[1] + 80, random.randint(1, 4) / 10, self.pars_y],
-                            [self.position[0] - 10, self.position[1] + 90, random.randint(1, 4) / 10, self.pars_y],]
+        self.delay0 = random.randint(1, 4) / 10
+        self.delay1 =random.randint(1, 4) / 10
+        self.delay2 =random.randint(1, 4) / 10
+        self.delay3 =random.randint(1, 4) / 10
+        self.delay4 =random.randint(1, 4) / 10
+        self.delay5 =random.randint(1, 4) / 10
+        self.delay6 =random.randint(1, 4) / 10
+        self.delay7 =random.randint(1, 4) / 10
+        self.delay8 =random.randint(1, 4) / 10
+        self.delay9 =random.randint(1, 4) / 10
+        self.delay10 =random.randint(1, 4) / 10
+        self.delay11 =random.randint(1, 4) / 10
+        self.mExplosions = [[self.position[0] + 25, self.position[1] - 25, self.delay0 , self.pars_y, self.delay0 ],
+                            [self.position[0] + 75, self.position[1] + 25, self.delay1 , self.pars_y, self.delay1 ],
+                            [self.position[0] + 40, self.position[1] - 30, self.delay2 , self.pars_y, self.delay2 ],
+                            [self.position[0] + 10, self.position[1] + 40, self.delay3 , self.pars_y, self.delay3 ],
+                            [self.position[0] - 45, self.position[1] + 80, self.delay4 , self.pars_y, self.delay4 ],
+                            [self.position[0] - 70, self.position[1] - 50, self.delay5 , self.pars_y, self.delay5 ],
+                            [self.position[0] - 50, self.position[1] + 50, self.delay6 , self.pars_y, self.delay6 ],
+                            [self.position[0] - 70, self.position[1] + 60, self.delay7 , self.pars_y, self.delay7 ],
+                            [self.position[0] - 20, self.position[1] - 70, self.delay8 , self.pars_y, self.delay8 ],
+                            [self.position[0] + 35, self.position[1] + 50, self.delay9 , self.pars_y, self.delay9 ],
+                            [self.position[0] + 40, self.position[1] + 80, self.delay10, self.pars_y, self.delay10],
+                            [self.position[0] - 10, self.position[1] + 90, self.delay11, self.pars_y, self.delay11]]
 
         # text box / timer stuff
         self.print1 = False
@@ -89,7 +100,7 @@ class Boss:
                 explosion[2] -= dt
                 if explosion[2] < 0:
                     explosion[3] -= self.explostionh
-                    explosion[2] = 0.1
+                    explosion[2] = explosion[4]
 
         length = len(self.mBullet_list)-1
         if length >= 0:
