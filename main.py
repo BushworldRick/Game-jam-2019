@@ -7,14 +7,18 @@ import random
 clock = pygame.time.Clock()
 done = False
 
-boss_phase = True
+start_screen = True
+boss_phase = False
 add_phase = False
 terminal_phase = False
 code_good = False
+game_over = False
 
 my_map = Map(code_good)
 boss = Boss(win_width/2, -200, my_map)
 term = Terminal()
+end_screen = pygame.image.load("Sprites/game_jam_end.png")
+start_img = pygame.image.load("Sprites/game_jam_cover.png")
 
 
 max_stars = 200
@@ -45,6 +49,9 @@ while not done:
             star[1] = -star[2]
     if code_good:
         my_map.Player.attack = 50
+    if boss.mHealth <= 0:
+        boss.mHealth = 0
+        game_over = True
 
     # Input
     evt = pygame.event.poll()
@@ -77,31 +84,43 @@ while not done:
                 print("it quit")
                 terminal_phase = False
                 add_phase = True
+        if game_over and evt.key == pygame.K_RETURN:
+            done = True
+        if start_screen and evt.key == pygame.K_RETURN:
+            start_screen = False
+            add_phase = True
 
     # Drawing
     win.fill((0, 0, 0))
-    for star in stars:
-        x = star[0]
-        y = star[1]
-        rgb = star[4]
-        st_twinkle = star[5]
-        if st_twinkle:
-            rgb = randint(50, 255)
-        pygame.draw.circle(win, (rgb, rgb, rgb), (int(x), int(y)), star[2])
+    if game_over:
+        win.blit(end_screen, (-75, -100, win_width, win_height))
 
-    pcent = my_map.Player.health / my_map.Player.max_health
-    color = my_map.hp_bar.get_at((int((my_map.hp_bar.get_width() - 1) * pcent), 0))
-    width = 150 * pcent
-    outer_width = 153
-    pygame.draw.rect(win, (255, 255, 255), (618, 18, outer_width, 15), 2)
-    pygame.draw.rect(win, color, (620, 20, width, 12))
+    elif start_screen:
+        win.blit(start_img, (-100, -100, win_width, win_height))
 
-    if add_phase:
-        my_map.draw(win)
-    elif boss_phase:
-        boss.draw(win)
-    elif terminal_phase:
-        term.draw(win)
+    elif not game_over:
+        for star in stars:
+            x = star[0]
+            y = star[1]
+            rgb = star[4]
+            st_twinkle = star[5]
+            if st_twinkle:
+                rgb = randint(50, 255)
+            pygame.draw.circle(win, (rgb, rgb, rgb), (int(x), int(y)), star[2])
+
+        pcent = my_map.Player.health / my_map.Player.max_health
+        color = my_map.hp_bar.get_at((int((my_map.hp_bar.get_width() - 1) * pcent), 0))
+        width = 150 * pcent
+        outer_width = 153
+        pygame.draw.rect(win, (255, 255, 255), (618, 18, outer_width, 15), 2)
+        pygame.draw.rect(win, color, (620, 20, width, 12))
+
+        if add_phase:
+            my_map.draw(win)
+        elif boss_phase:
+            boss.draw(win)
+        elif terminal_phase:
+            term.draw(win)
     pygame.display.flip()
 
 pygame.quit()
