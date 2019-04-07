@@ -24,7 +24,7 @@ class Boss:
         # text box / timer stuff
         self.print1 = False
         self.font = pygame.font.SysFont("Bahnschrift", 16)
-        self.print1_text = "Hah i'm gonona get you fool, ya fool!"
+        self.print1_text = "Hah! I'm gonna get you fool, ya fool!"
         self.print2 = False
         self.print2_text = "Figure out the code to leave fool, ya fool!"
         self.x = 0

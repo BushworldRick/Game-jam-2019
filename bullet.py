@@ -8,6 +8,8 @@ class Bullet:
         self.speed_y = 300 * 2
         self.speed_x = 100 * 2
         self.rad = 6
+        self.bullet_timer = 1
+
 
         #for when you fight boss
         self.code_good = code

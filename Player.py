@@ -48,6 +48,19 @@ class Player:
         # Bullet Update
         for b in self.bullet_list:
             b.update(dt)
+            bx = b.pos[0]
+            by = b.pos[1]
+            bullet_vec = [self.player_pos[0] - bx, self.player_pos[1] - by]
+            distance = (bullet_vec[0] **2 + bullet_vec[1] **2) ** (1/2)
+
+            if b.pos[1] < 0:
+                self.bullet_list.remove(b)
+            if distance >= 400:
+                self.bullet_list.remove(b)
+        print(self.player_pos)
+        if self.player_pos[1] < 440:
+            self.player_pos[1] = 440
+
 
         # keep on screen code
         if self.player_pos[0] < 0 + self.player_hitbox:
@@ -59,10 +72,6 @@ class Player:
         if self.player_pos[1] > self.screenheight - (self.player_hitbox *  2):
             self.player_pos[1] = self.screenheight - (self.player_hitbox * 2)
 
-        for b in self.bullet_list:
-            if b.pos[1] < 0:
-                self.bullet_list.remove(b)
-        # print(len(self.bullet_list))
 
     def input(self, evt, keys):
         # Moving player_ship
