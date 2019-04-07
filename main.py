@@ -20,6 +20,7 @@ term = Terminal()
 end_screen = pygame.image.load("Sprites/game_jam_end.png")
 start_img = pygame.image.load("Sprites/game_jam_cover.png")
 start_end_font = pygame.font.Font("Sprites/Fonts/venus rising rg.ttf", 24)
+add_font = pygame.font.Font("Sprites/Fonts/venus rising rg.ttf", 12)
 
 
 max_stars = 200
@@ -39,8 +40,10 @@ while not done:
     dt = clock.tick() / 1000.0
     if add_phase:
         my_map.update(dt, code_good)
+        my_map.Player.distance = 400
     elif boss_phase:
         boss.update(dt)
+        my_map.Player.distance = 1000
     elif terminal_phase:
         code_good = term.update(dt)
         print(str(code_good) + " main")
@@ -57,8 +60,7 @@ while not done:
                 game_over = True
     elif my_map.Player.health <= 0:
         my_map.Player.exploding = True
-        my_map.Player.health = 0
-        if my_map.Player.pars_y <= -300:
+        if my_map.Player.pars_y <= 8:
             my_map.Player.pars_y = 630
             boss.reset()
             my_map.reset()
@@ -66,6 +68,8 @@ while not done:
             my_map.Player.exploding = False
             boss_phase = False
             add_phase = True
+
+
 
     # Input
     evt = pygame.event.poll()
@@ -113,7 +117,10 @@ while not done:
 
     elif start_screen:
         win.blit(start_img, (-100, -150, win_width, win_height))
-        win.blit(start_end_font.render("Press Enter to Begin!", True, (39, 135, 104)), (175, 500))
+        win.blit(start_end_font.render("Press Enter to Begin!", True, (39, 135, 104)), (175, 450))
+        win.blit(add_font.render("Arrow Keys or WSAD to move", True, (39, 135, 104)), (20, 575))
+        win.blit(add_font.render("Space to fire weapon", True, (39, 135, 104)), (350, 575))
+        win.blit(add_font.render("P to open terminal", True, (39, 135, 104)), (600, 575))
 
     elif not game_over:
         for star in stars:
