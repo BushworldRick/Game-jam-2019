@@ -1,6 +1,7 @@
 import pygame
 from config import *
 from Player import *
+import random
 
 
 class Boss:
@@ -68,7 +69,7 @@ class Boss:
                 self.attack2(self.position[0], self.position[1])
 
         length = len(self.mBullet_list)-1
-        if length > 0:
+        if length >= 0:
             while length >= 0:
             #for group in self.mBullet_list:
                 bullets = self.mBullet_list[length]
@@ -88,11 +89,15 @@ class Boss:
                     b = py - by
                     distance = (a * a + b * b) ** 0.5
                     if distance < self.Map.Player.player_hitbox:
-                        self.Map.Player.health -= 5
+                        if bullet[4] == "attack1":
+                            self.Map.Player.health -= 5
+                        elif bullet[4] == "attack2":
+                            self.Map.Player.health -= 10
                         bullets.remove(bullet)
                         break
                 length -= 1
 
+        print(len(self.mBullet_list))
 
         for i in self.Map.Player.bullet_list:
             bul_rect = pygame.Rect(i.pos[0] - 3, i.pos[1] + 3, 6, 6)
@@ -102,23 +107,23 @@ class Boss:
                 self.Map.Player.bullet_list.remove(i)
 
     def attack1(self, spwn_x, spwn_y):
-        x_rate = 50
-        y_rate = 150
-        bullet1 = [spwn_x, spwn_y, 0, y_rate]
-        bullet2 = [spwn_x, spwn_y, x_rate, y_rate]
-        bullet3 = [spwn_x, spwn_y, x_rate*2, y_rate]
-        bullet4 = [spwn_x, spwn_y, -x_rate, y_rate]
-        bullet5 = [spwn_x, spwn_y, -x_rate*2, y_rate]
+        x_rate = random.randint(40, 60)
+        y_rate = random.randint(140, 160)
+        bullet1 = [spwn_x, spwn_y, 0, y_rate, "attack1"]
+        bullet2 = [spwn_x, spwn_y, x_rate, y_rate, "attack1"]
+        bullet3 = [spwn_x, spwn_y, x_rate*2, y_rate, "attack1"]
+        bullet4 = [spwn_x, spwn_y, -x_rate, y_rate, "attack1"]
+        bullet5 = [spwn_x, spwn_y, -x_rate*2, y_rate, "attack1"]
         bullet_group = [bullet1, bullet2, bullet3, bullet4, bullet5]
         self.mBullet_list.append(bullet_group)
         self.mBullet_cooldown = 1.5
 
     def attack2(self, spwn_x, spwn_y):
-        x_rate = 50
-        y_rate = 150
-        bullet1 = [spwn_x, spwn_y, 0, y_rate]
-        bullet2 = [spwn_x, spwn_y, x_rate*2, y_rate]
-        bullet3 = [spwn_x, spwn_y, -x_rate*2, y_rate]
+        x_rate = random.randint(40, 60)
+        y_rate = random.randint(140, 160)
+        bullet1 = [spwn_x, spwn_y, 0, y_rate, "attack2"]
+        bullet2 = [spwn_x, spwn_y, x_rate*2, y_rate, "attack2"]
+        bullet3 = [spwn_x, spwn_y, -x_rate*2, y_rate, "attack2"]
         self.mBullet_list.append([bullet1, bullet2, bullet3])
         self.mBullet2_cooldown = 2
 
