@@ -97,17 +97,19 @@ class Map:
                     
 
         for enemy in self.mEnemies:
-            ex = enemy.mPos[0]
-            ey = enemy.mPos[1]
-            px = self.Player.player_pos[0]
-            py = self.Player.player_pos[1]
-            dx = ex - px
-            dy = ey - py
-            ship_dist = (dx ** 2 + dy ** 2) ** 0.5
-            if ship_dist < self.Player.player_hitbox + enemy.mEnemy_rad:
-                enemy.explode()
-                self.Player.health -= 10
-                break
+            if not enemy.Exploding:
+                ex = enemy.mPos[0]
+                ey = enemy.mPos[1]
+                px = self.Player.player_pos[0]
+                py = self.Player.player_pos[1]
+                dx = ex - px
+                dy = ey - py
+                ship_dist = (dx ** 2 + dy ** 2) ** 0.5
+
+                if ship_dist < self.Player.player_hitbox + enemy.mEnemy_rad:
+                    enemy.explode()
+                    self.Player.health -= 25
+                    break
 
             if enemy.pars_y <= 8:
                 self.mEnemies.remove(enemy)

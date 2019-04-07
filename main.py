@@ -65,8 +65,6 @@ while not done:
             boss_phase = False
             add_phase = True
 
-
-
     # Input
     evt = pygame.event.poll()
     keys = pygame.key.get_pressed()
