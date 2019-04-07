@@ -80,6 +80,17 @@ class Boss:
                     if bullet[1] > win_height + 10:
                         self.mBullet_list.remove(bullets)
                         break
+                    bx = bullet[0]
+                    by = bullet[1]
+                    px = self.Map.Player.player_pos[0]
+                    py = self.Map.Player.player_pos[1]
+                    a = px - bx
+                    b = py - by
+                    distance = (a * a + b * b) ** 0.5
+                    if distance < self.Map.Player.player_hitbox:
+                        self.Map.Player.health -= 5
+                        bullets.remove(bullet)
+                        break
                 length -= 1
 
 

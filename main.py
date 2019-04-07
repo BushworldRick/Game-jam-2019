@@ -7,8 +7,8 @@ import random
 clock = pygame.time.Clock()
 done = False
 
-boss_phase = False
-add_phase = True
+boss_phase = True
+add_phase = False
 terminal_phase = False
 code_good = False
 
