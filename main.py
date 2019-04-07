@@ -55,7 +55,8 @@ while not done:
         game_over = True
     elif my_map.Player.health <= 0:
         my_map.Player.exploding = True
-        if my_map.Player.pars_y <= 8:
+
+        if my_map.Player.pars_y <= -300:
             my_map.Player.pars_y = 630
             boss.reset()
             my_map.reset()
