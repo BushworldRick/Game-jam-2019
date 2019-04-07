@@ -10,6 +10,10 @@ class Enemy:
         self.mPos = [x, y]
         self.mSin_width = random.randint(30, 75)
         self.mid_x = x
+        self.driftx = random.randint(-2, 2)/10
+        self.drifty = random.randint(-2, 2)/10
+        self.offsetx = 0
+        self.offsety = 0
         self.Speed = 0.1
         self.mRate = 100
         self.mEnemy_rad = 18
@@ -30,6 +34,8 @@ class Enemy:
             self.mPos[0] = math.sin(self.mPos[1] * .05) * self.mSin_width + self.mid_x
         elif self.Exploding:
             self.mFrame_delay -= dt
+            self.offsetx += self.driftx
+            self.offsety += self.drifty
             if self.mFrame_delay < 0:
                 self.pars_y -= self.Exploding_frameh
                 self.mFrame_delay = 0.1
@@ -71,6 +77,7 @@ class Enemy:
                 txt = font.render(str(self.mLetter), True, (0, 255, 0))
                 txt_w = txt.get_width()
                 txt_h = txt.get_height()
-                win.blit(txt, (int(self.mPos[0] - (txt_w/2)), int(self.mPos[1]) - (txt_h/2)))
+
+                win.blit(txt, (int(self.mPos[0] - (txt_w/2) + self.offsetx), int(self.mPos[1]) - (txt_h/2) + self.offsety))
             win.blit(SHIP, (int(self.mPos[0] - (85/2)), int(self.mPos[1]) - (self.Exploding_frameh/2)), (310, self.pars_y, 85, self.Exploding_frameh))
         # pygame.draw.circle(win, (255, 0, 0), (int(self.mPos[0]), int(self.mPos[1]) - 5), self.mEnemy_rad, 1)
