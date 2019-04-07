@@ -95,6 +95,7 @@ class Boss:
             if self.mBullet2_cooldown < 0:
                 self.attack2(self.position[0], self.position[1])
 
+
         if self.mHealth <= 0:
             for explosion in self.mExplosions:
                 explosion[2] -= dt
