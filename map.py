@@ -5,6 +5,7 @@ from random import randint, choice, sample
 from Enemy import *
 from bullet import *
 from copy import deepcopy
+import boss
 
 NUM_ENEMIES = 50
 
@@ -84,8 +85,17 @@ class Map:
 
         for group in self.mEnemy_bullets:
             for bullet in group:
-                bullet[1] += bullet[2][1] * dt
-                bullet[0] += bullet[2][0] * dt
+                bullet[1] += bullet[2][1] * dt #bullet y
+                bullet[0] += bullet[2][0] * dt # bullet x
+
+                # bullet collition with playder
+                x = bullet[0] - self.Player.player_pos[0]
+                y = bullet[1] - self.Player.player_pos[1]
+                c = (x**2 + y**2) ** (1/2)
+                if c <= 5 + self.Player.player_hitbox:
+                    group.remove(bullet)
+                    self.Player.health -= 5
+                    
 
         for enemy in self.mEnemies:
             if enemy.pars_y <= 8:
@@ -104,6 +114,16 @@ class Map:
                     if enemy.pars_y == 323:
                         self.Player.bullet_list.remove(bullet)
                     break
+        #tracking enemy bullets
+        """for b in range(len(self.mEnemy_bullets)):
+            print(self.mEnemy_bullets[b][0])
+            x = self.mEnemy_bullets[b][0] - self.Player.player_pos[0]
+            y = self.mEnemy_bullets[b][1] - self.Player.player_pos[1]
+            c = (x**2 + y**2) ** (1/2)
+            if c <= 5 + self.Player.player_hitbox:
+                self.mEnemy_bullets.remove(b)
+                self.Player.health -= 5"""
+
 
     def reset(self):
         self.Enemy_index = 1
