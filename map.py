@@ -84,10 +84,10 @@ class Map:
 
         for group in self.mEnemy_bullets:
             for bullet in group:
-                bullet[1] += bullet[2][1] * dt #bullet y
-                bullet[0] += bullet[2][0] * dt # bullet x
+                bullet[1] += bullet[2][1] * dt  # bullet y
+                bullet[0] += bullet[2][0] * dt  # bullet x
 
-                # bullet collition with playder
+                # bullet collision with player
                 x = bullet[0] - self.Player.player_pos[0]
                 y = bullet[1] - self.Player.player_pos[1]
                 c = (x**2 + y**2) ** (1/2)
@@ -97,6 +97,18 @@ class Map:
                     
 
         for enemy in self.mEnemies:
+            ex = enemy.mPos[0]
+            ey = enemy.mPos[1]
+            px = self.Player.player_pos[0]
+            py = self.Player.player_pos[1]
+            dx = ex - px
+            dy = ey - py
+            ship_dist = (dx ** 2 + dy ** 2) ** 0.5
+            if ship_dist < self.Player.player_hitbox + enemy.mEnemy_rad:
+                enemy.explode()
+                self.Player.health -= 10
+                break
+
             if enemy.pars_y <= 8:
                 self.mEnemies.remove(enemy)
                 break
