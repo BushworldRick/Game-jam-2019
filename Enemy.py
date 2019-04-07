@@ -53,7 +53,8 @@ class Enemy:
         if self.mAttack_type == 1:
             bullet1 = [self.mPos[0] - 5, self.mPos[1], [x_rate, y_rate]]
             bullet2 = [self.mPos[0] + 5, self.mPos[1], [-x_rate, y_rate]]
-            bullet_group = [bullet1, bullet2]
+            bullet3 = [self.mPos[0], self.mPos[1], [0, y_rate*1.1]]
+            bullet_group = [bullet1, bullet2, bullet3]
         self.mBullet_cooldown = 1.5
 
         return bullet_group
