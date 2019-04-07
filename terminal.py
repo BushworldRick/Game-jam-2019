@@ -11,13 +11,13 @@ class Terminal:
         self.timer = 1
         self.x = 0
         self.not_available = False      # checking for wrong key press thing
-        self.solutions = ["Code: the end","Code: theend"]
+        self.solutions = ["Code: theend","Code: the end"]
         self.code_good = False
         self.locked_input = ''
+        self.test_code = False
 
     def update(self, dt):
 
-        # self.x += dt
         if self.not_available:
             self.x += dt
             print(self.x)
@@ -27,11 +27,17 @@ class Terminal:
                 self.term_string = "Code: "
                 self.not_available = False
 
-        for s in self.solutions:
-            if s == self.locked_input:
-                self.code_good = True
-                self.term_string = "Code: Accepted"
-                #print(self.code_good)
+        if self.test_code == True:
+            for s in self.solutions:
+                if s == self.locked_input:
+                    self.code_good = True
+                    self.term_string = "Code: Accepted"
+                    self.not_available = False
+                    #print(self.code_good)
+                else:
+                    self.term_string = "Code: Not Accepted"
+                    self.not_available = True
+                    self.test_code = False
         return self.code_good
 
 
@@ -40,15 +46,15 @@ class Terminal:
             x = evt.key
             print(x)
             if str(x) in self.keys:
-                # self.term_string = "Code: "
                 self.term_string += self.keys[str(x)]
             else:
                 x = "Code: Not Available"
                 self.term_string = x
                 self.not_available = True
             if evt.key == pygame.K_RETURN:
-                self.not_available = False
-                self.locked_input = "Code: the end"
+                #self.not_available = False
+                self.test_code = True
+                self.locked_input = self.term_string
 
 
     def draw(self, win):
