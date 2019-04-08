@@ -226,7 +226,7 @@ class Boss:
             self.text_box.fill((255, 255, 255))
             self.text_box.blit(self.font.render(self.print2_text, True, (0, 0, 0)), (15, 15))
 
-        pygame.draw.rect(win, (255, 255, 255), (self.position[0] - (self.mBoss_w / 2), self.position[1] - (self.mBoss_h / 2), self.mBoss_w, self.mBoss_h), 2)
+        # pygame.draw.rect(win, (255, 255, 255), (self.position[0] - (self.mBoss_w / 2), self.position[1] - (self.mBoss_h / 2), self.mBoss_w, self.mBoss_h), 2)
 
         if self.mHealth <= 0:
             self.explosions(win)
